@@ -1,0 +1,516 @@
+/*
+  ____    ___  ____     ___  ____    ____  _     
+ /    |  /  _]|    \   /  _]|    \  /    || |    
+|   __| /  [_ |  _  | /  [_ |  D  )|  o  || |    
+|  |  ||    _]|  |  ||    _]|    / |     || |___ 
+|  |_ ||   [_ |  |  ||   [_ |    \ |  _  ||     |
+|     ||     ||  |  ||     ||  .  \|  |  ||     |
+|___,_||_____||__|__||_____||__|\_||__|__||_____|
+                                                 
+
+*/
+
+/*POUR UTILISER LES REM FACILEMENT.*/
+html {
+	font-size: 62.5%;
+}
+
+/*IMAGE ET DEFINITION TAILLE PAGE*/
+body {
+ 	background: url('http://imageshack.com/a/img922/402/kqEI18.jpg') no-repeat;
+ 	/*background: url('../image/dojo.jpg') no-repeat;*/
+ 	background-size: cover;
+ 	max-width: 1250px;
+ 	margin: auto;
+ 	/*N'aggrandit pas l'écran à l'ejection de des éléments*/
+  	overflow-x:hidden;
+	text-align: center;
+}
+
+/*MISE EN FORME DES ZONDE DE TEXTE*/
+h2, h3, h4, p, a, li {
+	color: white;
+	font-family: 'Press Start 2P', cursive;
+	font-weight: normal;
+}
+
+/*OMBRE SUR LES BOUTONS ET SUR LES IMAGES*/
+aside img, a, p {
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+/*! FLEXBOX !*/
+nav ul, .states, section, aside {
+	display: flex;
+}
+
+nav ul, main ul {
+	/*Margin a droite permet de centrer vu que la flexbox ne le fait pas :s*/
+	margin: 0 4rem 4rem 0;
+}
+
+
+
+
+/*DEFINITION DES LIENS ET BOUTONS*/
+a {
+	text-decoration: none;
+	padding: 1.5rem;
+	color: rgba(59, 94, 100, 1);
+	border: 2px solid rgb(59, 94, 100);
+	background: url('http://imageshack.com/a/img923/7659/WwqyZx.png');
+	opacity: 0.8;
+}
+
+a:hover {
+	opacity: 1;
+}
+
+a:active {
+	border: 4px solid white;
+	color: white;
+}
+
+li {
+	list-style: none;
+	margin: 1.2rem 0;
+}
+
+/*
+
+ __ __    ___   ____  ___      ___  ____  
+|  |  |  /  _] /    ||   \    /  _]|    \ 
+|  |  | /  [_ |  o  ||    \  /  [_ |  D  )
+|  _  ||    _]|     ||  D  ||    _]|    / 
+|  |  ||   [_ |  _  ||     ||   [_ |    \ 
+|  |  ||     ||  |  ||     ||     ||  .  \
+|__|__||_____||__|__||_____||_____||__|\_|
+                                          
+
+*/
+
+/*TITRE SUPER KITSCH*/
+h1 {
+	font-family: 'Condiment', cursive;
+	font-size: 4rem;
+	color: red;
+	text-shadow: 0 1px 0 #eee,
+             0 2px 0 #e5e5e5,
+             -1px 3px 0 #C8C8C8,
+             -1px 4px 0 #C1C1C1,
+             -2px 5px 0 #B9B9B9,
+             -2px 6px 0 #B2B2B2,
+             -2px 7px 2px rgba(0,0,0, 0.6),
+             -2px 7px 8px rgba(0,0,0, 0.2),
+             -2px 7px 45px rgba(0,0,0, 0.4);
+}
+
+nav ul {
+	justify-content: center;
+}
+
+/*A STYLISER !!!!!!!!!!!!!!!!!!!*/
+nav aside {
+	width: 70%;
+	margin: auto;
+	position: absolute;
+	z-index: 2;
+	background-color: rgba(244,231,203, 0.8);
+	visibility: hidden;
+}
+
+
+/*
+ ___ ___   ____  ____  ____  
+|   |   | /    ||    ||    \ 
+| _   _ ||  o  | |  | |  _  |
+|  \_/  ||     | |  | |  |  |
+|   |   ||  _  | |  | |  |  |
+|   |   ||  |  | |  | |  |  |
+|___|___||__|__||____||__|__|
+                             
+
+		 _ _  __     _                
+		| (_)/ _|   | |               
+		| |_| |_ ___| |__   __ _ _ __ 
+		| | |  _/ _ \ '_ \ / _` | '__|
+		| | | ||  __/ |_) | (_| | |   
+		|_|_|_| \___|_.__/ \__,_|_|   
+		                              
+                              
+*/
+
+
+/*LIFEBAR PREMIER CONTENEUR*/
+.states {
+	justify-content: space-around;
+	height: 30px;
+	width: 100%;
+}
+
+/*REPRÉSENTE HP MAX*/
+.playerBar, .rivalBar {
+	border: 2px solid white;
+	border-radius: 2px;
+	width: 50rem;
+	height: 100%;
+	margin : 0 1rem;
+}
+
+/*LA PARTIE DONT LA WIDTH SE REDUIRA A FIL DES COUPS RECUS*/
+.playerLife, .rivalLife {
+	max-width: 100%;
+	height: 100%;
+	background-color: green;
+	transition: width 500ms;
+	transition-timing-function: ease-in;
+}
+
+/*Retourne la barre de vie du rival*/
+.rivalBar{
+	transform: rotate(180deg);
+}
+
+/*
+		     _        _       
+		    | |      | |      
+		 ___| |_ __ _| |_ ___ 
+		/ __| __/ _` | __/ __|
+		\__ \ || (_| | |_\__ \
+		|___/\__\__,_|\__|___/
+		                      
+                      
+*/
+
+h4 {
+	width : 50%;
+	display: inline-block;
+}
+
+/*
+		 _           _   _                  
+		| |         | | | |                 
+		| |__  _   _| |_| |_ ___  _ __  ___ 
+		| '_ \| | | | __| __/ _ \| '_ \/ __|
+		| |_) | |_| | |_| || (_) | | | \__ \
+		|_.__/ \__,_|\__|\__\___/|_| |_|___/
+		                                    
+                                    
+*/
+
+section {
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5rem;
+	position: relative;
+	top: -25rem;
+}
+
+/*bouttons du jeu, hérite ligne 50*/
+section a {
+	width: 10%;
+	border: 4px solid red;
+	padding: 0.9rem;
+	margin: 1rem;
+	font-size: 2rem;
+	border-radius: 4px 25px;
+	transition: 500ms;
+}
+
+/*
+		 _        __                                      
+		(_)      / _|                                     
+		 _ _ __ | |_ ___   __ _  __ _ _ __ ___   ___  ___ 
+		| | '_ \|  _/ _ \ / _` |/ _` | '_ ` _ \ / _ \/ __|
+		| | | | | || (_) | (_| | (_| | | | | | |  __/\__ \
+		|_|_| |_|_| \___/ \__, |\__,_|_| |_| |_|\___||___/
+		                   __/ |                          
+		                  |___/                           
+*/
+
+article {
+	position: relative;
+	top: -25rem;
+}
+
+article p {
+	font-size: 1rem;
+	color: blue;
+	font-weight: bold;
+	background-color: rgba(244,231,203, 0.8);
+	width: 40%;
+	margin: 1rem auto;
+	padding: 2rem;
+	border : 2px solid white;
+	border-radius: 2px;
+}
+
+/*
+		 _                                 
+		(_)                                
+		 _ _ __ ___   __ _  __ _  ___  ___ 
+		| | '_ ` _ \ / _` |/ _` |/ _ \/ __|
+		| | | | | | | (_| | (_| |  __/\__ \
+		|_|_| |_| |_|\__,_|\__, |\___||___/
+		                    __/ |          
+		                   |___/           
+*/
+
+
+/*PLACEMENT TRANSITION*/
+aside {
+	justify-content: space-around;
+	z-index: -1;
+}
+
+aside img {
+	
+	/*pour eviter la déformation par chrome gérant mal la flexbox*/
+	width: 18rem;
+	height: 18rem;
+	/*18%*/
+	
+	
+	border: 8px solid #7A6643;
+	border-radius: 5px;
+	transition: 6000ms;
+}
+
+
+/*
+  __                     
+ / _|                    
+| |_ ___  _ __ _ __ ___  
+|  _/ _ \| '__| '_ ` _ \ 
+| || (_) | |  | | | | | |
+|_| \___/|_|  |_| |_| |_|
+                         
+                         
+*/
+
+/*INDEX.PHTML*/
+form {
+	visibility: hidden;
+	display: flex;
+	flex-direction: column;
+	width: 25%;
+	margin: 0 auto;
+	height: 2rem;
+}
+
+/*
+    __  _       ____  _____ _____   ___  _____      ____  _____
+   /  ]| |     /    |/ ___// ___/  /  _]/ ___/     |    |/ ___/
+  /  / | |    |  o  (   \_(   \_  /  [_(   \_      |__  (   \_ 
+ /  /  | |___ |     |\__  |\__  ||    _]\__  |     __|  |\__  |
+/   \_ |     ||  _  |/  \ |/  \ ||   [_ /  \ |    /  |  |/  \ |
+\     ||     ||  |  |\    |\    ||     |\    |    \  `  |\    |
+ \____||_____||__|__| \___| \___||_____| \___|     \____| \___|
+                                                               
+*/
+
+/* EN CAS DE VICTOIRE OU DEFAITE*/
+.defeatedRival {
+	transform: translateX(12000px) rotate(360deg) translateY(250px);
+}
+
+.defeatedPlayer {
+	transform: translateX(-12000px) rotate(-360deg) translateY(250px);
+}
+
+.grow{
+	margin: auto;
+}
+
+
+/*EJECTION DES BOUTON*/
+.smashedButtonTopKame{
+	transform: rotate(-90deg) translateY(-1000px);
+}
+
+.smashedButtonTopKen{
+	transform: rotate(90deg) translateY(-1000px);
+}
+
+.smashedButtonMiddleKame{
+	transform: translateX(-1000px) rotate(-90deg) translateY(-100px);
+}
+
+.smashedButtonMiddleKen{
+	transform: translateX(1000px) rotate(-90deg) translateY(100px);
+}
+
+.smashedButtonBelowKame{
+	transform: translateX(-1200px) rotate(-15deg) translateY(200px);	
+}
+
+.smashedButtonBelowKen{
+	transform: translateX(1200px) rotate(15deg) translateY(200px);	
+}
+
+/*formulaire "vu/pavu FINIR DE STYLISER*/
+.visible {
+	visibility: visible;
+	padding: 5rem;
+	height: auto;
+}
+
+/*Champs valide*/
+.ok {
+	border: 2px solid rgb(0,128,0);
+	background-color: rgb(184,249,184);
+}
+
+.wrong {
+	border: 2px solid rgb(255,0,0);
+	background-color: rgb(255,131,131);
+}
+
+
+
+
+/*
+  __                                            .__                
+_/  |_  ____   _____ ______   ________________  |__|______   ____  
+\   __\/ __ \ /     \\____ \ /  _ \_  __ \__  \ |  \_  __ \_/ __ \ 
+ |  | \  ___/|  Y Y  \  |_> >  <_> )  | \// __ \|  ||  | \/\  ___/ 
+ |__|  \___  >__|_|  /   __/ \____/|__|  (____  /__||__|    \___  >
+           \/      \/|__|                     \/                \/ 
+
+
+*/
+
+/*SCORE*/
+table {
+	color : white;
+	width: 50%;
+	margin: 4rem auto;
+}
+
+caption, th, td {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+
+
+/*
+
+ ___ ___    ___  ___    ____   ____       ___   __ __    ___  ____   ____    ___  _____
+|   |   |  /  _]|   \  |    | /    |     /   \ |  |  |  /  _]|    \ |    |  /  _]/ ___/
+| _   _ | /  [_ |    \  |  | |  o  |    |     ||  |  | /  [_ |  D  ) |  |  /  [_(   \_ 
+|  \_/  ||    _]|  D  | |  | |     |    |  Q  ||  |  ||    _]|    /  |  | |    _]\__  |
+|   |   ||   [_ |     | |  | |  _  |    |     ||  :  ||   [_ |    \  |  | |   [_ /  \ |
+|   |   ||     ||     | |  | |  |  |    |     ||     ||     ||  .  \ |  | |     |\    |
+|___|___||_____||_____||____||__|__|     \__,_| \__,_||_____||__|\_||____||_____| \___|
+                                                                                       
+*/
+
+@media all and (max-width: 865px)
+{
+	/*boutons alignés retrouvent leur place d'origine*/
+	section {
+		position: inherit;
+		flex-direction: row;
+		justify-content: center;
+	}
+	
+	section a {
+		width : 20%;
+		background-size: cover;
+		padding: 2rem;
+	}
+	
+	article {
+		position: inherit;
+		/*"Contraindre" l'image de fond à occuper tout l'écran*/
+		padding-bottom: 20rem;
+	}
+}
+
+@media all and (max-width: 500px)
+{
+	
+	aside, h4, section {
+		position: relative;
+	}
+	
+	h1 {
+		font-size: 2.8rem;
+	}
+	
+	/*Décalage des instructions pour pouvoir recliquer sur about ^^*/
+	nav aside {
+		top: 11rem;
+	}
+	
+	/*Mise en colones et nouvelle height*/
+	.states, aside {
+		height: 30rem;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	/*Nouvelle width barre de vie et aside*/
+	.playerBar, .rivalBar, aside {
+		width: 95%;
+		margin : 0 auto;
+	}
+	
+	/*Redefinition height des barre de vie sinon elles prennent toute la place.*/
+	.playerBar, .rivalBar {
+		height: 30px;
+	}
+	
+	/*Superpostion de l'aside sur boite barre de vie*/
+	aside {
+		height: 20rem;
+		top: -29.7rem;
+	}
+	
+	/*Redéfinition width et border des images.*/
+	aside img {
+		width: 10rem;
+		height: 10rem;
+		border: 4px solid #7A6643;
+	}
+	
+	/*Image rival décalée à droite*/
+	aside img:last-of-type {
+		align-self: flex-end;
+	}
+	
+	/*Repositionnement des stats des joueurs*/
+	h4 {
+	    top: -30.2rem;
+	    display: block;
+	    width: auto;
+	    font-size: 0.6rem;
+	}
+	
+	h4:last-of-type {
+		top: -5rem;
+	}
+	
+	/*Repositionnement des boutons de jeu*/
+	section {
+		margin: 0;
+		top: -47.1rem;
+		left: 6rem;
+	}
+	
+	/*Redéfinition des boutons*/
+	section a {
+		width: auto;
+		font-size: 1.4rem;
+		border-radius: 100px;
+		border : 2px solid red;
+		margin: 0 0.2rem;
+	}
+	
+	article{
+		position: relative;
+		top: -29rem;
+	}
+}
