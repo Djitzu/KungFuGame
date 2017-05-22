@@ -1,4 +1,4 @@
-//Fichier gérant le systéème de jeu de game.php
+//Fichier gérant le système de jeu de game.php
 
 /******************* DONNEES ********************/
 // Déclaration d un constructeur d objets de personnages
@@ -37,13 +37,11 @@ var hpPlayer = document.querySelector('.playerLife');
 var hpRival = document.querySelector('.rivalLife');
 
 
-
-
-
-//querySelector BulleBD
+//querySelector BulleBD et contenu
 var playerBubbleChoice = document.querySelector('aside div:first-of-type');
-var cpuBubbleChoice = document.querySelector('aside div:last-of-type');
-
+var RivalBubbleChoice = document.querySelector('aside div:last-of-type');
+var BubblePlayerContent = document.querySelector('aside div:first-of-type i');
+var BubbleRivalContent = document.querySelector('aside div:last-of-type i');
 
 
 
@@ -63,65 +61,47 @@ function dice(min, max)
   return Math.floor(Math.random() * (max - min +1)) + min;
 }
 
+//Modification de la barre de vie durant le combat
+function lifeBarHited (pvActual, pvMax, element)
+{
+	//Produit en croix pour modifie la width, 100 est sa taille en pourcentage
+	//Pas super précis mais j'ai pas mieux...
+	var lifeRemainig = Math.round(100 * pvActual / pvMax);
+	element.style.width = lifeRemainig + '%';
+}
+
+
+//Ecriture et apparition des bulles des BD pour chaque perso
+function makeBubble (element1, attack, element2)
+{
+	element1.className=(attack);
+	element2.classList.add('bubble');
+}
+
+
 // --------------------LIGHT ATTACK
 function attackRival()
 {
 	var damage = dice(1, 6) + rival.att;
 	player.pv -= damage;
 
-	//Produit en croix pour modifie la width, 100 est sa taille en pourcentage 
-	var x = Math.round(100 * player.pv / hpMaxPlayer);
-	document.querySelector('.playerLife').style.width = x + '%';
+	lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
+	
+	//Bulle Rival
+	makeBubble(BubbleRivalContent,  "fa fa-hand-paper-o", RivalBubbleChoice);
+
 	return textRival.textContent = "Ken use Quick Slap !";
 }
+
 
 function lightAttackPlayer()
 {
 	var damage = dice(1, 6) + player.att;
 	rival.pv -= damage;
-
-	//Ca marche pas top mais pas trouvé mieux 
-	var x = Math.round(100 * rival.pv / hpMaxRival);
-	document.querySelector('.rivalLife').style.width = x + '%';
-	
-	
-	
-
-
-/*TEst pour enlever et remettre la class provoquant l'animation, mais ne fonctionne qu'une fois... Même avec un if */
-/*il faut trouver un moyen pour enlever la class bubble (manuellement, via l'inspecteur, ça marche).
-	Methode utilisée : 
-	-avec un if dans la fonction
-	-configuration actuelle en déplaçant remove en début de fonction
-	-avec un set interval dans la fonction
-	-avec un nouvvel addeventlistenner qui fait remove au click...
-	
-	
-	-idée : faire une fonction toggleBubble qui gére l'apparition et la disparition de la class via un set interval. Appeler directement cette fonction
-	-addeventlistener('transitionend', function(){});
-
-*/
-		playerBubbleChoice.classList.remove('bubble');
-		playerBubbleChoice.classList.add('bubble');
-
-	
+	lifeBarHited(rival.pv, hpMaxRival, hpRival);
+	makeBubble(BubblePlayerContent, "fa fa-hand-paper-o", playerBubbleChoice);
 	return textPlayer.textContent = "Kame Sennin use Quick Slap !";
 }
-
-
-/*
-function vanishBubble()
-{
-	playerBubbleChoice.classList.remove('Bubble')
-}
-
-*/
-
-
-
-
-
-
 
 
 
@@ -130,17 +110,17 @@ function heavyAttackRival()
 {
 	var damage = (dice(1, 6) + rival.att) *2;
 	player.pv -= damage;
-		var x = Math.round(100 * player.pv / hpMaxPlayer);
-	document.querySelector('.playerLife').style.width = x + '%';
+	lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
+	makeBubble(BubbleRivalContent, "fa fa-hand-rock-o", RivalBubbleChoice);
 	return textRival.textContent = "Ken use Grosse Patate !";
 }
 
-function grandCoup()
+function GrossePatate()
 {
 	var damage = (dice(1, 6) + player.att) *2;
 	rival.pv -= damage;
-		var x = Math.round(100 * rival.pv / hpMaxRival);
-	document.querySelector('.rivalLife').style.width = x + '%';
+	lifeBarHited(rival.pv, hpMaxRival, hpRival);
+	makeBubble(BubblePlayerContent, "fa fa-hand-rock-o", playerBubbleChoice);
 	return textPlayer.textContent = "Kame Sennin use Grosse Patate !";
 }
 
@@ -166,7 +146,7 @@ function deathOrGlory()
 
 			//pour vider la barre de vie qui ne l était pas à la defaite d un perso.
 			document.querySelector('.rivalLife').style.width = 0 + "%";
-			textPlayer.textContent =('Kame Sennin : \"he he he !\"')
+			textPlayer.textContent =('Kame Sennin : \"he he he !\"');
 			return textRival.textContent = "Ken is defeated : You win !";
 		} else if (player.pv <= 0) {
 			kameSennin.classList.add('defeatedPlayer');
@@ -203,8 +183,10 @@ function attackPlayer()
 			case 3:
 				var damage = (dice(1, 6) + player.att) /2;
 				rival.pv -= damage;	
-				var x = Math.round(100 * rival.pv / hpMaxRival);
-				document.querySelector('.rivalLife').style.width = x + '%';
+				lifeBarHited(rival.pv, hpMaxRival, hpRival);
+				makeBubble(BubblePlayerContent, "fa fa-hand-paper-o",playerBubbleChoice);
+				makeBubble(BubbleRivalContent, "fa fa-hand-lizard-o", RivalBubbleChoice);
+				
 				textPlayer.textContent = "Kame Sennin's Quick Slap deals half damage.";	
 				textRival.textContent = "Ken defends !";
 				break;
@@ -219,17 +201,18 @@ function heavyAttackPlayer()
 		{
 			case 1:
 				attackRival();
-				grandCoup();
+				GrossePatate();
 				break;
 			case 2:
 				heavyAttackRival();
-				grandCoup();
+				GrossePatate();
 				break;
 			case 3:
 				heavyAttackRival();
 				textRival.textContent = "Ken dodges and counters ! Watch your teeth !";
-				var x = Math.round(100 * player.pv / hpMaxPlayer);
-				document.querySelector('.playerLife').style.width = x + '%';				
+				lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
+				makeBubble(BubblePlayerContent, "fa fa-hand-rock-o", playerBubbleChoice);
+				makeBubble(BubbleRivalContent, "fa fa-hand-lizard-o", RivalBubbleChoice);
 				textPlayer.textContent = "Kame Sennin strikes the wind because ...";
 				break;
 		}
@@ -241,28 +224,35 @@ function heavyAttackPlayer()
 
 function dodgeCounter()
 {
-		switch (rivalChoice())
-		{
-			case 1:
-				var damage = (dice(1, 6) + rival.att) /2;
-				player.pv -= damage;
-				var x = Math.round(100 * player.pv / hpMaxPlayer);
-				document.querySelector('.playerLife').style.width = x + '%';		
-				textPlayer.textContent = "Kame Sennin defends !";
-				textRival.textContent = "Ken's Quick Slap deals half damage.";
-				break;
-			case 2:
-				grandCoup();						
-				textPlayer.textContent = "Kame Sennin dodges and counters like a master !";
-				textRival.textContent = "Ken stroke the wind like a noob !";
-				break;
-			case 3:
-				textPlayer.textContent = "Duellists defend at the same time...";
-				textRival.textContent = "Pussies..."
-				break;
-		}
-		deathOrGlory();
+	makeBubble(BubblePlayerContent, "fa fa-hand-lizard-o", playerBubbleChoice);
+	switch (rivalChoice())
+	{
+		case 1:
+			var damage = (dice(1, 6) + rival.att) /2;
+			player.pv -= damage;
+			lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
+			makeBubble(BubbleRivalContent, "fa fa-hand-paper-o", RivalBubbleChoice);
+			textPlayer.textContent = "Kame Sennin defends !";
+			textRival.textContent = "Ken's Quick Slap deals half damage.";
+			break;
+		case 2:
+			GrossePatate();	
+			
+			//ecraser dom GrossePatate
+			makeBubble(BubblePlayerContent, "fa fa-hand-lizard-o", playerBubbleChoice);
+			makeBubble(BubbleRivalContent, "fa fa-hand-rock-o", RivalBubbleChoice);
+			textPlayer.textContent = "Kame Sennin dodges and counters like a master !";
+			textRival.textContent = "Ken stroke the wind like a noob !";
+			break;
+		case 3:
+			makeBubble(BubbleRivalContent, "fa fa-hand-lizard-o", RivalBubbleChoice);
+			textPlayer.textContent = "Duellists defend at the same time...";
+			textRival.textContent = "Pussies..."
+			break;
+	}
+	deathOrGlory();
 }
+
 
 
 /************ CODE PRINCIPAL **************/
@@ -272,3 +262,14 @@ function dodgeCounter()
 quickStrikePlayer.addEventListener('click', attackPlayer);
 grossePatate.addEventListener('click', heavyAttackPlayer);
 block.addEventListener('click', dodgeCounter);
+
+//Disparition bulles bd
+playerBubbleChoice.addEventListener('transitionend', function()
+{
+	this.classList.remove('bubble');
+});
+	
+RivalBubbleChoice.addEventListener('transitionend', function()
+{
+	this.classList.remove('bubble');
+});

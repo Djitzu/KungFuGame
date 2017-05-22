@@ -21,7 +21,7 @@
 				
 				<!--BULLE DE BD AU CLICK, AFFICHE CHOIX JOUEUR-->
 				<div>
-					<i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+					<i aria-hidden="true"></i>
 				</div>
 				
 				
@@ -29,7 +29,7 @@
 				
 				<!--BULLE DE BD AU CLICK, AFFICHE CHOIX CPU-->
 				<div>
-					<i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+					<i aria-hidden="true"></i>
 				</div>
 			</aside>
 

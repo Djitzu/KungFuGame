@@ -402,6 +402,12 @@ form {
 	background-color: rgb(255,131,131);
 }
 
+/*apparition bulle de bd*/
+.bubble{
+	opacity: 1;
+	z-index: 2;
+}
+
 
 
 
@@ -435,17 +441,13 @@ aside div {
 	box-shadow: 8px 8px 12px black;
 	text-align: center;
 	line-height: 9rem;
-	z-index: 2;
 	font-size: 4rem;
 	
 	/*doublons l 60*/
 	color: rgba(59, 94, 100, 1);
 	
-	
-	
-	/*Animation*/
 	opacity: 0;
-	/*animation: 2s 1 popBubble;*/
+	transition: 500ms;
 }
 
 
@@ -482,60 +484,8 @@ aside div:last-of-type, aside div:last-of-type i {
 
 
 
-.bubble{
-	animation: 1s 1 popBubble;	
-}
 
 
-@keyframes popBubble{
-	0% {
-		opacity: 0;
-	}
-	
-	20%{
-		opacity: 1;
-	}
-	
-	80%{
-		opacity: 1;
-	}
-	
-	100%{
-		opacity: 0;
-	}
-}
-
-
-
-
-
-/*Player content anim*/
-aside div:first-of-type i {
-	animation : 1s 1 shakeContent;
-}
-
-/*CPU content anim*/
-aside div:last-of-type i {
-	animation : 1s 1 shakeContentCpu;
-}
-
-@keyframes shakeContent{
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform :rotate(1080deg);
-	}
-}
-
-@keyframes shakeContentCpu{
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform :rotate(1620deg);
-	}
-}
 /*
 
 REDUIRE TAILLE DES BULLES POUR PORTABLES !!!!
@@ -567,7 +517,11 @@ table {
 	color : white;
 	width: 50%;
 	margin: 4rem auto;
+}
+
+td:last-of-type{
 	animation: 0.6s 1 vortex;
+	
 }
 
 /*Si plusieurs anim, les ranger au même endroit.*/
@@ -618,6 +572,17 @@ caption, th, td {
 		position: inherit;
 		/*"Contraindre" l'image de fond à occuper tout l'écran*/
 		padding-bottom: 20rem;
+	}
+	
+	/*Bulles*/
+	aside div{
+		left: 40%;
+		top: 25%;
+	}
+	
+	aside div:last-of-type {
+    	left: 50%;
+    	top: 35%;
 	}
 }
 
@@ -699,6 +664,30 @@ caption, th, td {
 		border-radius: 100px;
 		border : 2px solid red;
 		margin: 0 0.2rem;
+	}
+	
+	
+	/*Redéfinitions bulles de bd*/
+	aside div {
+		line-height: 1.5;
+		left: 35%;
+		top: 42%;
+		width: 50px;
+		height: 50px;
+		font-size: 3rem;
+	}
+	
+	aside div:after{
+	top: -35px;
+    left: -55px;
+    width: 40px;
+    height: 100px;
+    z-index: 1;
+	}
+	
+	aside div:last-of-type {
+    left: 50%;
+    top: 70%;
 	}
 	
 	article{
