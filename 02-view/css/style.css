@@ -17,7 +17,7 @@ html {
 
 /*IMAGE ET DEFINITION TAILLE PAGE*/
 body {
- 	background: url('http://imageshack.com/a/img922/402/kqEI18.jpg') no-repeat;
+ 	background: url('../image/dojo2.jpg') no-repeat;
  	/*background: url('../image/dojo.jpg') no-repeat;*/
  	background-size: cover;
  	max-width: 1250px;
@@ -35,7 +35,7 @@ h2, h3, h4, p, a, li {
 }
 
 /*OMBRE SUR LES BOUTONS ET SUR LES IMAGES*/
-aside img, a, p {
+aside img, a, main p {
 	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -59,7 +59,7 @@ a {
 	padding: 1.5rem;
 	color: rgba(59, 94, 100, 1);
 	border: 2px solid rgb(59, 94, 100);
-	background: url('http://imageshack.com/a/img923/7659/WwqyZx.png');
+	background-color: rgba(244,231,203, 0.8);
 	opacity: 0.8;
 }
 
@@ -106,20 +106,54 @@ h1 {
              -2px 7px 45px rgba(0,0,0, 0.4);
 }
 
+/*PLUS DE KITSCH : Blink Fury*/
+h1 span {
+	animation: 0.6s 4 blink;
+}
+
+
+/*Si plusieurs anim, les ranger au même endroit.*/
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+
+
 nav ul {
 	justify-content: center;
 }
 
 /*A STYLISER !!!!!!!!!!!!!!!!!!!*/
 nav aside {
+	flex-direction: column;
 	width: 70%;
 	margin: auto;
 	position: absolute;
 	z-index: 2;
-	background-color: rgba(244,231,203, 0.8);
+	color: black;
+	background-color: rgba(244,231,203, 0.9);
 	visibility: hidden;
+	transition: 500ms;
 }
 
+nav aside p, nav aside li{
+	color: rgba(59, 94, 100, 0.9);
+}
+
+nav aside ul {
+	/*doublons l 133*/
+	flex-direction: column;
+}
+
+h5 {
+	font-size: 1.3rem;
+	font-family: 'Press Start 2P', cursive;
+}
 
 /*
  ___ ___   ____  ____  ____  
@@ -278,6 +312,7 @@ aside img {
 }
 
 
+
 /*
   __                     
  / _|                    
@@ -370,6 +405,152 @@ form {
 
 
 
+
+
+
+
+
+/*
+
+ ____  _  _  __    __    ____    ____  ____       
+(  _ \/ )( \(  )  (  )  (  __)  (  _ \(    \      
+ ) _ () \/ (/ (_/\/ (_/\ ) _)    ) _ ( ) D (      
+(____/\____/\____/\____/(____)  (____/(____/      
+
+*/
+
+
+/*BULLE*/
+aside div {
+	position: absolute;
+	left: 40%;
+	top: 28%;
+	width: 100px;
+	height: 100px;
+	background: white;
+	-moz-border-radius: 100px / 50px;
+	-webkit-border-radius: 100px / 50px;
+	border-radius: 110px / 120px;
+	border-top: 9px solid transparent;
+	box-shadow: 8px 8px 12px black;
+	text-align: center;
+	line-height: 9rem;
+	z-index: 2;
+	font-size: 4rem;
+	
+	/*doublons l 60*/
+	color: rgba(59, 94, 100, 1);
+	
+	
+	
+	/*Animation*/
+	opacity: 0;
+	/*animation: 2s 1 popBubble;*/
+}
+
+
+
+/*La queue qui dépasse ... ... =='...*/
+aside div:after {
+	content: "";
+	position: absolute;
+	border: 0 solid transparent;
+	border-top: 15px solid white;
+	border-radius: 200px 0 0 0;
+	top: -20px;
+	left: -85px;
+	width: 60px;
+	height: 120px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+}
+
+/*RIVAL*/
+aside div:last-of-type {
+	left: 55%;
+	top: 35%;
+	box-shadow: -8px -8px 12px black;
+}
+
+
+/*CPU Rotation conteneur et contenu*/
+aside div:last-of-type, aside div:last-of-type i {
+	transform: rotate(180deg);
+}
+
+
+
+.bubble{
+	animation: 1s 1 popBubble;	
+}
+
+
+@keyframes popBubble{
+	0% {
+		opacity: 0;
+	}
+	
+	20%{
+		opacity: 1;
+	}
+	
+	80%{
+		opacity: 1;
+	}
+	
+	100%{
+		opacity: 0;
+	}
+}
+
+
+
+
+
+/*Player content anim*/
+aside div:first-of-type i {
+	animation : 1s 1 shakeContent;
+}
+
+/*CPU content anim*/
+aside div:last-of-type i {
+	animation : 1s 1 shakeContentCpu;
+}
+
+@keyframes shakeContent{
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform :rotate(1080deg);
+	}
+}
+
+@keyframes shakeContentCpu{
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform :rotate(1620deg);
+	}
+}
+/*
+
+REDUIRE TAILLE DES BULLES POUR PORTABLES !!!!
+
+*/
+
+
+
+
+
+
+
+
+
+
 /*
   __                                            .__                
 _/  |_  ____   _____ ______   ________________  |__|______   ____  
@@ -386,6 +567,17 @@ table {
 	color : white;
 	width: 50%;
 	margin: 4rem auto;
+	animation: 0.6s 1 vortex;
+}
+
+/*Si plusieurs anim, les ranger au même endroit.*/
+@keyframes vortex {
+	0% {
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(1080deg);
+	}
 }
 
 caption, th, td {

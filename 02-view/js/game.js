@@ -37,6 +37,16 @@ var hpPlayer = document.querySelector('.playerLife');
 var hpRival = document.querySelector('.rivalLife');
 
 
+
+
+
+//querySelector BulleBD
+var playerBubbleChoice = document.querySelector('aside div:first-of-type');
+var cpuBubbleChoice = document.querySelector('aside div:last-of-type');
+
+
+
+
 /****************** FONCTIONS ***************/
 
 
@@ -73,8 +83,46 @@ function lightAttackPlayer()
 	//Ca marche pas top mais pas trouvé mieux 
 	var x = Math.round(100 * rival.pv / hpMaxRival);
 	document.querySelector('.rivalLife').style.width = x + '%';
+	
+	
+	
+
+
+/*TEst pour enlever et remettre la class provoquant l'animation, mais ne fonctionne qu'une fois... Même avec un if */
+/*il faut trouver un moyen pour enlever la class bubble (manuellement, via l'inspecteur, ça marche).
+	Methode utilisée : 
+	-avec un if dans la fonction
+	-configuration actuelle en déplaçant remove en début de fonction
+	-avec un set interval dans la fonction
+	-avec un nouvvel addeventlistenner qui fait remove au click...
+	
+	
+	-idée : faire une fonction toggleBubble qui gére l'apparition et la disparition de la class via un set interval. Appeler directement cette fonction
+	-addeventlistener('transitionend', function(){});
+
+*/
+		playerBubbleChoice.classList.remove('bubble');
+		playerBubbleChoice.classList.add('bubble');
+
+	
 	return textPlayer.textContent = "Kame Sennin use Quick Slap !";
 }
+
+
+/*
+function vanishBubble()
+{
+	playerBubbleChoice.classList.remove('Bubble')
+}
+
+*/
+
+
+
+
+
+
+
 
 
 //---------------------HEAVY ATTACK
@@ -116,7 +164,7 @@ function deathOrGlory()
 			block.classList.add('smashedButtonBelowKen');
 
 
-			//pour vider la barre de vie qui ne l était pas vide à la defaite d un perso.
+			//pour vider la barre de vie qui ne l était pas à la defaite d un perso.
 			document.querySelector('.rivalLife').style.width = 0 + "%";
 			textPlayer.textContent =('Kame Sennin : \"he he he !\"')
 			return textRival.textContent = "Ken is defeated : You win !";
@@ -139,7 +187,7 @@ function deathOrGlory()
 
 //---------------------GESION DES DIFFERENTS CAS DE ROUND
 
-//SI LE JOUEUR CLIQUE SUR "QUICK SLAP"
+//SI LE JOUEUR CLIQUE SUR "QUICK SLAP/Paper"
 function attackPlayer()
 {
 		switch (rivalChoice())
@@ -164,7 +212,7 @@ function attackPlayer()
 		deathOrGlory();
 }
 
-// SI LE JOUEUR CLIQUE SUR "Grosse Patate"
+// SI LE JOUEUR CLIQUE SUR "Grosse Patate/rock"
 function heavyAttackPlayer()
 {
 		switch (rivalChoice())

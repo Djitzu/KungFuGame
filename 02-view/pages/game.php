@@ -17,8 +17,20 @@
 			
 			<!-- HERO -->
 			<aside>
-				<img src="http://imageshack.com/a/img922/7834/qVOoo0.jpg" alt="Hero">
-				<img src="http://imageshack.com/a/img922/9655/mSkMLu.jpg" alt="Rival">
+				<img src="image/tortuegeniale.jpg" alt="Hero">
+				
+				<!--BULLE DE BD AU CLICK, AFFICHE CHOIX JOUEUR-->
+				<div>
+					<i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+				</div>
+				
+				
+				<img src="image/ken.jpg" alt="Rival">
+				
+				<!--BULLE DE BD AU CLICK, AFFICHE CHOIX CPU-->
+				<div>
+					<i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+				</div>
 			</aside>
 
 			<!-- GAMEPAD -->
