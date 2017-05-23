@@ -13,7 +13,7 @@
 					<li><a href="index.php?page=score">Score</a></li>
 					
 					<?php if($_SESSION['pseudo']): ?>
-						<li><a href="../03-controler/deconnexion.php">Deconnexion</a></li>
+						<li><a href="03-controler/deconnexion.php">Deconnexion</a></li>
 					<?php endif; ?>
 					
 					<li><a href="#!">About</a></li>

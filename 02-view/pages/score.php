@@ -1,4 +1,4 @@
-<?php include_once('../03-controler/request-score.php'); ?>
+<?php include_once('03-controler/request-score.php'); ?>
 
 		<main>
 			<h2>This is the scoring page</h1>

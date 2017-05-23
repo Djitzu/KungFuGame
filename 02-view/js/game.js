@@ -1,5 +1,34 @@
 //Fichier gérant le système de jeu de game.php
 
+
+
+
+//Afficher score dans un formulaire via la fonction deathOrGlory
+
+//recupérer l'input hidden via le dom
+var inputScoreHidden = document.querySelector('article form input[type="hidden"]');
+
+//recupérer le article p via le dom
+var showScoreInP = document.querySelector('form p');
+
+//écrire le contenue de la variable score dans chacun
+
+
+//Proposer de l'enregistrer
+
+//Redirection au tableau des scores ou nouveaux matchs.
+
+
+
+
+
+
+
+
+
+
+
+
 /******************* DONNEES ********************/
 // Déclaration d un constructeur d objets de personnages
 var perso = function()
@@ -15,6 +44,11 @@ var rival = new perso;
 //Variabales stockant les pv max pour modifier la barre de vie.
 var hpMaxRival = rival.pv;
 var hpMaxPlayer = player.pv;
+
+//Variable recevant le score et son modificateur : le nombre de clic impacte négativement le score
+var score = 0;
+var clicCount = 0;
+var totalScore;
 
 
 // querySelector des boutons
@@ -137,26 +171,33 @@ function deathOrGlory()
 	if (rival.pv <= 0) 
 	{
 			ken.classList.add('defeatedRival');
-			kameSennin.classList.add('grow');
 
 			quickStrikePlayer.classList.add('smashedButtonTopKen');
 			grossePatate.classList.add('smashedButtonMiddleKen');
 			block.classList.add('smashedButtonBelowKen');
 
-
 			//pour vider la barre de vie qui ne l était pas à la defaite d un perso.
 			document.querySelector('.rivalLife').style.width = 0 + "%";
 			textPlayer.textContent =('Kame Sennin : \"he he he !\"');
-			return textRival.textContent = "Ken is defeated : You win !";
+			
+			score = player.pv;
+			clicCount = clicCount*100;
+			totalScore = score * 1000 - clicCount;
+			
+			//affichage du score dans le artcle p et dans input hidden
+			showScoreInP.textContent = totalScore + " in " + clicCount/100 + "clic(s)";
+			inputScoreHidden.value = totalScore;
+			
+			
+			//Temporaire : affichage du score dans la barre d'info
+			return textRival.textContent = "Ken is defeated : You win ! Your score :" + totalScore;
+			
 		} else if (player.pv <= 0) {
 			kameSennin.classList.add('defeatedPlayer');
-			ken.classList.add('grow');
-
 
 			quickStrikePlayer.classList.add('smashedButtonTopKame');
 			grossePatate.classList.add('smashedButtonMiddleKame');
 			block.classList.add('smashedButtonBelowKame');
-
 
 			document.querySelector('.playerLife').style.width = 0 + "%";
 			textRival.textContent = "Ken : \"Your dojo belong to me !\" ";
@@ -170,6 +211,8 @@ function deathOrGlory()
 //SI LE JOUEUR CLIQUE SUR "QUICK SLAP/Paper"
 function attackPlayer()
 {
+	//Incrémentation de la variable contenant le nombre de clic => score
+	clicCount++;
 		switch (rivalChoice())
 		{
 			case 1:
@@ -197,6 +240,7 @@ function attackPlayer()
 // SI LE JOUEUR CLIQUE SUR "Grosse Patate/rock"
 function heavyAttackPlayer()
 {
+	clicCount++;
 		switch (rivalChoice())
 		{
 			case 1:
@@ -224,6 +268,7 @@ function heavyAttackPlayer()
 
 function dodgeCounter()
 {
+	clicCount++;
 	makeBubble(BubblePlayerContent, "fa fa-hand-lizard-o", playerBubbleChoice);
 	switch (rivalChoice())
 	{

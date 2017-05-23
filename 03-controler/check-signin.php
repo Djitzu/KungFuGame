@@ -1,5 +1,5 @@
 <?php
-require_once'class-signin.php';
+require_once'../01-model/class-signin.php';
 
 var_dump($_POST);
 
@@ -16,14 +16,14 @@ $user = $connexion->findUser($pseudo, $password_crypted);
 
 if (!$user)
 {
-     header('Location:https://ajax-training-jeromepisi.c9users.io/KungFu/02-view/index.php?page=home&connexion=error');
+     header('Location:https://ajax-training-jeromepisi.c9users.io/KungFu/index.php?page=home&connexion=error');
 } else {
   echo $user["pseudo"];
   session_start();
   $_SESSION['id'] = $user["id"];
   $_SESSION['pseudo'] = $user["pseudo"];
   var_dump($_SESSION);
-  header('Location:https://ajax-training-jeromepisi.c9users.io/KungFu/02-view/index.php?page=home&connexion=ok');
+  header('Location:https://ajax-training-jeromepisi.c9users.io/KungFu/index.php?page=home&connexion=ok');
   echo 'vous êtes connecté !';
 }
 

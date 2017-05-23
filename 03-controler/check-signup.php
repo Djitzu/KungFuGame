@@ -1,5 +1,5 @@
 <?php
-require_once'class-signup.php';
+require_once'../01-model/class-signup.php';
 var_dump($_POST);
 
 /***********/
@@ -52,7 +52,7 @@ if (!ifMatch($regexAlphaNum, $pseudo))
     //Objet issu de class-inscription.php pour écrire dans la DB
     $inscrit = new InsertMember();
     $inscrit->insert($pseudo, $firstName, $lastName, $mail, $password_crypted);
-    header('Location:https://ajax-training-jeromepisi.c9users.io/KungFu/02-view/index.php?page=home&inscription=ok');    
+    header('Location:https://ajax-training-jeromepisi.c9users.io/KungFu/index.php?page=home&inscription=ok');    
 }
 
 ?>

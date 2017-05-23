@@ -14,23 +14,24 @@
 			<h4></h4><!--
 			--><h4></h4>
 			
-			
-			<!-- HERO -->
+			<!--PLAYER & RIVAL-->
 			<aside>
-				<img src="image/tortuegeniale.jpg" alt="Hero">
+				<!-- HERO -->
+				<img src="02-view/image/tortuegeniale.jpg" alt="Hero">
 				
-				<!--BULLE DE BD AU CLICK, AFFICHE CHOIX JOUEUR-->
+				<!--BULLE DE BD AU CLIC, AFFICHE CHOIX JOUEUR-->
 				<div>
 					<i aria-hidden="true"></i>
 				</div>
 				
+				<!--RIVAL-->
+				<img src="02-view/image/ken.jpg" alt="Rival">
 				
-				<img src="image/ken.jpg" alt="Rival">
-				
-				<!--BULLE DE BD AU CLICK, AFFICHE CHOIX CPU-->
+				<!--BULLE DE BD AU CLIC, AFFICHE CHOIX CPU-->
 				<div>
 					<i aria-hidden="true"></i>
 				</div>
+			
 			</aside>
 
 			<!-- GAMEPAD -->
@@ -44,7 +45,28 @@
 			<article>
 				<p></p>
 				<p></p>
+				
+				
+				<!--EN CONSTRUCTION-->
+				
+				<!--bulle-lien pour rematch-->
+					<!--Player-->
+					<!--Rival-->
+				
+				<!--Formulaire contenant le score z-index opacity:0 ...-->
+			
+				<form action="03-controler/send-score.php" method="post" >
+					<label for="score">Your score is :</label>
+					<p></p>
+					<input for="score" type="hidden" name="score"/>
+					<input type="submit" value="Save my score !"/>
+				</form>
+				
+				
+					<!--Ecire le score dans le p et dans l'input hidden afin que le joueur ne puisse le modifier.-->
 			</article>
+			
+			
 		</main>
 	</body>
-		<script type="text/javascript" src="js/game.js"></script>
+		<script type="text/javascript" src="02-view/js/game.js"></script>

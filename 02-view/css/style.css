@@ -312,7 +312,22 @@ aside img {
 }
 
 
+/*
+NEW BULLE de bd Player{
+	link for new match = phrase buddies
+}
 
+NEW BULLE de bd Rival{
+	link for new match = phrase buddies
+}
+
+//Afficher le score et permettre de l'enregistrer
+aside form {
+	;
+}
+
+
+*/
 /*
   __                     
  / _|                    
@@ -325,7 +340,7 @@ aside img {
 */
 
 /*INDEX.PHTML*/
-form {
+ul form {
 	visibility: hidden;
 	display: flex;
 	flex-direction: column;
@@ -485,22 +500,6 @@ aside div:last-of-type, aside div:last-of-type i {
 
 
 
-
-/*
-
-REDUIRE TAILLE DES BULLES POUR PORTABLES !!!!
-
-*/
-
-
-
-
-
-
-
-
-
-
 /*
   __                                            .__                
 _/  |_  ____   _____ ______   ________________  |__|______   ____  
@@ -550,7 +549,20 @@ caption, th, td {
 |   |   ||   [_ |     | |  | |  _  |    |     ||  :  ||   [_ |    \  |  | |   [_ /  \ |
 |   |   ||     ||     | |  | |  |  |    |     ||     ||     ||  .  \ |  | |     |\    |
 |___|___||_____||_____||____||__|__|     \__,_| \__,_||_____||__|\_||____||_____| \___|
-                                                                                       
+
+
+				
+				
+				  _          _                  ___    __ _____           
+				 | |        | |                / _ \  / /| ____|          
+				 | |__   ___| | _____      __ | (_) |/ /_| |__  _ ____  __
+				 | '_ \ / _ \ |/ _ \ \ /\ / /  > _ <| '_ \___ \| '_ \ \/ /
+				 | |_) |  __/ | (_) \ V  V /  | (_) | (_) |__) | |_) >  < 
+				 |_.__/ \___|_|\___/ \_/\_/    \___/ \___/____/| .__/_/\_\
+				                                               | |        
+				                                               |_|        
+				
+				                                                                                     
 */
 
 @media all and (max-width: 865px)
@@ -586,6 +598,18 @@ caption, th, td {
 	}
 }
 
+
+/*
+					  _          _                 _____  ___   ___            
+					 | |        | |               | ____|/ _ \ / _ \           
+					 | |__   ___| | _____      __ | |__ | | | | | | |_ ____  __
+					 | '_ \ / _ \ |/ _ \ \ /\ / / |___ \| | | | | | | '_ \ \/ /
+					 | |_) |  __/ | (_) \ V  V /   ___) | |_| | |_| | |_) >  < 
+					 |_.__/ \___|_|\___/ \_/\_/   |____/ \___/ \___/| .__/_/\_\
+					                                                | |        
+					                                                |_|        
+*/
+
 @media all and (max-width: 500px)
 {
 	
@@ -597,9 +621,18 @@ caption, th, td {
 		font-size: 2.8rem;
 	}
 	
-	/*Décalage des instructions pour pouvoir recliquer sur about ^^*/
+	/*Permettre à la nav d'aller à la ligne*/
+	nav ul {
+		flex-wrap: wrap;
+	}
+	
+	nav ul li {
+		margin: 1.9rem 0;
+	}
+	
+	/*Décalage des instructions pour pouvoir recliquer sur about^^ Prévoir Ajout d'un bouton ???*/
 	nav aside {
-		top: 11rem;
+		top: 18rem;
 	}
 	
 	/*Mise en colones et nouvelle height*/

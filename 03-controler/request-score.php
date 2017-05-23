@@ -1,5 +1,5 @@
 <?php
-require_once'class-score.php';
+require_once'01-model/class-score.php';
 
 /*creer objet à partir de la classe étendue dans score.php*/
 $requestScore = new DataScore();
