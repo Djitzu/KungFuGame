@@ -1,6 +1,5 @@
 <?php
 require_once'../01-model/class-signup.php';
-var_dump($_POST);
 
 /***********/
 /***DATA****/

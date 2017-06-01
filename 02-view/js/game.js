@@ -1,39 +1,15 @@
-//Fichier gérant le système de jeu de game.php
+//FICHIER GÉRANT LE SYSTEME DE JEU GAME.PHP
 
 
 
-
-//Afficher score dans un formulaire via la fonction deathOrGlory
-
-//recupérer l'input hidden via le dom
-var inputScoreHidden = document.querySelector('article form input[type="hidden"]');
-
-//recupérer le article p via le dom
-var showScoreInP = document.querySelector('form p');
-
-//écrire le contenue de la variable score dans chacun
-
-
-//Proposer de l'enregistrer
-
-//Redirection au tableau des scores ou nouveaux matchs.
-
-
-
-
-
-
-
-
-
-
-
-
+/************************************************/
 /******************* DONNEES ********************/
-// Déclaration d un constructeur d objets de personnages
+/************************************************/
+
+// Déclaration d un constructeur d objet de personnages
 var perso = function()
 {
-	this.pv = dice(90, 110); //90-110
+	this.pv = dice(90, 110);
 	this.att = dice(5, 7);
 };
 
@@ -45,33 +21,36 @@ var rival = new perso;
 var hpMaxRival = rival.pv;
 var hpMaxPlayer = player.pv;
 
-//Variable recevant le score et son modificateur : le nombre de clic impacte négativement le score
+//Variables recevant le score, son modificateur (le nombre de clic impacte négativement le score) et le formulaire d'enregistrement du score
 var score = 0;
 var clicCount = 0;
 var totalScore;
+var formScore = document.querySelector('article form');
+var inputScoreHidden = document.querySelector('article form input[type="hidden"]');
+var showScoreInP = document.querySelector('form p');
 
 
-// querySelector des boutons
+// Boutons
 var quickStrikePlayer = document.querySelector('section a:first-of-type');
 var grossePatate = document.querySelector('section a:nth-of-type(2)');
 var block = document.querySelector('section a:last-of-type');
 
-// querySelector des zone de textes infos joueur
+// Zone de textes infos joueur
 var statePlayer = document.querySelector('h4:first-of-type');
 var stateRival = document.querySelector('h4:last-of-type');
-var textPlayer = document.querySelector('article p:first-of-type');
-var textRival = document.querySelector('article p:last-of-type');
+var infoTextUp = document.querySelector('article p:first-of-type');
+var infoTextDown = document.querySelector('article p:last-of-type');
 
-//querySelector image
+// Image
 var kameSennin = document.querySelector('aside img:first-of-type');
 var ken = document.querySelector('aside img:last-of-type');
 
-//querySelector lifebar
+// Barre de vie
 var hpPlayer = document.querySelector('.playerLife');
 var hpRival = document.querySelector('.rivalLife');
 
 
-//querySelector BulleBD et contenu
+// Bulles de BD et leur contenu
 var playerBubbleChoice = document.querySelector('aside div:first-of-type');
 var RivalBubbleChoice = document.querySelector('aside div:last-of-type');
 var BubblePlayerContent = document.querySelector('aside div:first-of-type i');
@@ -79,12 +58,11 @@ var BubbleRivalContent = document.querySelector('aside div:last-of-type i');
 
 
 
-/****************** FONCTIONS ***************/
 
+/***********************************************/
+/****************** FONCTIONS ******************/
+/***********************************************/
 
-//infos joueurs et rival
-statePlayer.textContent = "- PLAYER - HP : " + player.pv + " STR : " + player.att;
-stateRival.textContent = "- CPU - HP : " + rival.pv + " STR : " + rival.att;
 
 
 // Fonction générant un nombre entier entre un mini et un max inclus
@@ -99,7 +77,6 @@ function dice(min, max)
 function lifeBarHited (pvActual, pvMax, element)
 {
 	//Produit en croix pour modifie la width, 100 est sa taille en pourcentage
-	//Pas super précis mais j'ai pas mieux...
 	var lifeRemainig = Math.round(100 * pvActual / pvMax);
 	element.style.width = lifeRemainig + '%';
 }
@@ -119,22 +96,26 @@ function attackRival()
 	var damage = dice(1, 6) + rival.att;
 	player.pv -= damage;
 
+	//Modification de la barre de vie
 	lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
 	
 	//Bulle Rival
 	makeBubble(BubbleRivalContent,  "fa fa-hand-paper-o", RivalBubbleChoice);
 
-	return textRival.textContent = "Ken use Quick Slap !";
+	infoTextDown.textContent = "Ken use Quick Slap !";
 }
 
 
 function lightAttackPlayer()
 {
+	
+	
+	//MODIF ICI  !!!!!!!!!!!!!!!!!!!!!
 	var damage = dice(1, 6) + player.att;
 	rival.pv -= damage;
 	lifeBarHited(rival.pv, hpMaxRival, hpRival);
 	makeBubble(BubblePlayerContent, "fa fa-hand-paper-o", playerBubbleChoice);
-	return textPlayer.textContent = "Kame Sennin use Quick Slap !";
+	infoTextUp.textContent = "Kame Sennin use Quick Slap !";
 }
 
 
@@ -146,7 +127,7 @@ function heavyAttackRival()
 	player.pv -= damage;
 	lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
 	makeBubble(BubbleRivalContent, "fa fa-hand-rock-o", RivalBubbleChoice);
-	return textRival.textContent = "Ken use Grosse Patate !";
+	infoTextDown.textContent = "Ken use Grosse Patate !";
 }
 
 function GrossePatate()
@@ -155,7 +136,7 @@ function GrossePatate()
 	rival.pv -= damage;
 	lifeBarHited(rival.pv, hpMaxRival, hpRival);
 	makeBubble(BubblePlayerContent, "fa fa-hand-rock-o", playerBubbleChoice);
-	return textPlayer.textContent = "Kame Sennin use Grosse Patate !";
+	infoTextUp.textContent = "Kame Sennin use Grosse Patate !";
 }
 
 //---------------------Détermine le choix de Rival
@@ -168,50 +149,84 @@ function rivalChoice()
 //--------------------Victoire ou Défaite
 function deathOrGlory()
 {
-	if (rival.pv <= 0) 
+	if ((rival.pv <= 0) && (player.pv <=0))
 	{
-			ken.classList.add('defeatedRival');
+		//Ejection des images
+		ken.classList.add('defeatedRival');
+		kameSennin.classList.add('defeatedPlayer');
+		
+		//Ejection des boutons
+		quickStrikePlayer.classList.add('smashedButtonTopKen');
+		grossePatate.classList.add('smashedButtonMiddleKame');
+		block.classList.add('smashedButtonBelowKen');
+		
+		//pour vider la barre de vie qui ne l était pas à la defaite d un perso.
+		document.querySelector('.rivalLife').style.width = 0 + "%";
+		document.querySelector('.playerLife').style.width = 0 + "%";
+		
+		//Apparition bulle de in de combat
+		victoryPlayerBubble.classList.add('bubble');
 
+		//infos de jeu
+		infoTextUp.textContent = "Double KO !";
+		infoTextDown.textContent = "Clics on the bubble above or refresh the page(mobile) to wash your honor";
+		
+	} else if (rival.pv <= 0) {
+			ken.classList.add('defeatedRival');
 			quickStrikePlayer.classList.add('smashedButtonTopKen');
 			grossePatate.classList.add('smashedButtonMiddleKen');
 			block.classList.add('smashedButtonBelowKen');
-
-			//pour vider la barre de vie qui ne l était pas à la defaite d un perso.
 			document.querySelector('.rivalLife').style.width = 0 + "%";
-			textPlayer.textContent =('Kame Sennin : \"he he he !\"');
 			
+			//calcul du score
 			score = player.pv;
 			clicCount = clicCount*100;
 			totalScore = score * 1000 - clicCount;
 			
-			//affichage du score dans le artcle p et dans input hidden
-			showScoreInP.textContent = totalScore + " in " + clicCount/100 + "clic(s)";
+			//affichage du score dans le 'artcle p' et dans 'input hidden'
+			showScoreInP.textContent = "You made " + totalScore + " points in " + clicCount/100 + " hits (clics) !!!";
 			inputScoreHidden.value = totalScore;
 			
+			//Apparition du formulaire contenant le score
+			formScore.classList.add('bubble');
 			
-			//Temporaire : affichage du score dans la barre d'info
-			return textRival.textContent = "Ken is defeated : You win ! Your score :" + totalScore;
+			victoryPlayerBubble.classList.add('bubble');
+			
+			//Dialogues différents selon victoire
+			if (player.pv >= 60){
+				infoTextUp.textContent ='Kame Sennin : \"Did you bleed ? I can\'t see with your red clothes... Noob ! \"';
+			} else if ((player.pv < 60) && (player.pv >= 20)) {
+				infoTextUp.textContent ='Kame Sennin : \"You have some skills but I have the high ground\"';
+			} else if (player.pv < 20) {
+				infoTextUp.textContent ='Kame Sennin : \"Ouch ! That was closed...\"';
+			}
+			infoTextDown.textContent = "You win ! Click on \"Again\" or refresh to humiliate Ken again" ;
 			
 		} else if (player.pv <= 0) {
 			kameSennin.classList.add('defeatedPlayer');
-
 			quickStrikePlayer.classList.add('smashedButtonTopKame');
 			grossePatate.classList.add('smashedButtonMiddleKame');
 			block.classList.add('smashedButtonBelowKame');
-
 			document.querySelector('.playerLife').style.width = 0 + "%";
-			textRival.textContent = "Ken : \"Your dojo belong to me !\" ";
-			return textPlayer.textContent = "Ho no ! ... You loose. Sorry for you wounded ego.";
+			victoryRivalBubble.classList.add('bubble');
+			if (rival.pv >= 60){
+				infoTextUp.textContent = "Ken : \"Don't tell me you're actually unconscious.\" ";
+			} else if ((rival.pv < 60) && (rival.pv >= 20)) {
+				infoTextUp.textContent = "Ken : \"Shoryouken !\" ";
+			} else if (rival.pv < 20) {
+				infoTextUp.textContent = "Ken : \"You're better than you look. Try harder.\" ";
+			}
+			infoTextDown.textContent = "You loose ! Clicking \"more\" or refresh the page to avenge yourself !";
 	}
 }
 
 
 //---------------------GESION DES DIFFERENTS CAS DE ROUND
 
-//SI LE JOUEUR CLIQUE SUR "QUICK SLAP/Paper"
+//SI LE JOUEUR CLIQUE SUR "QUICK SLAP (Paper)"
 function attackPlayer()
 {
-	//Incrémentation de la variable contenant le nombre de clic => score
+	//Incrémentation de la variable contenant le nombre de clics (hits) => score
 	clicCount++;
 		switch (rivalChoice())
 		{
@@ -229,9 +244,8 @@ function attackPlayer()
 				lifeBarHited(rival.pv, hpMaxRival, hpRival);
 				makeBubble(BubblePlayerContent, "fa fa-hand-paper-o",playerBubbleChoice);
 				makeBubble(BubbleRivalContent, "fa fa-hand-lizard-o", RivalBubbleChoice);
-				
-				textPlayer.textContent = "Kame Sennin's Quick Slap deals half damage.";	
-				textRival.textContent = "Ken defends !";
+				infoTextUp.textContent = "Kame Sennin's Quick Slap deals half damage.";	
+				infoTextDown.textContent = "Ken defends !";
 				break;
 		}
 		deathOrGlory();
@@ -253,11 +267,11 @@ function heavyAttackPlayer()
 				break;
 			case 3:
 				heavyAttackRival();
-				textRival.textContent = "Ken dodges and counters ! Watch your teeth !";
+				infoTextDown.textContent = "Ken dodges and counters ! Watch your teeth !";
 				lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
 				makeBubble(BubblePlayerContent, "fa fa-hand-rock-o", playerBubbleChoice);
 				makeBubble(BubbleRivalContent, "fa fa-hand-lizard-o", RivalBubbleChoice);
-				textPlayer.textContent = "Kame Sennin strikes the wind because ...";
+				infoTextUp.textContent = "Kame Sennin strikes the wind because ...";
 				break;
 		}
 		deathOrGlory();
@@ -277,8 +291,8 @@ function dodgeCounter()
 			player.pv -= damage;
 			lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
 			makeBubble(BubbleRivalContent, "fa fa-hand-paper-o", RivalBubbleChoice);
-			textPlayer.textContent = "Kame Sennin defends !";
-			textRival.textContent = "Ken's Quick Slap deals half damage.";
+			infoTextUp.textContent = "Kame Sennin defends !";
+			infoTextDown.textContent = "Ken's Quick Slap deals half damage.";
 			break;
 		case 2:
 			GrossePatate();	
@@ -286,13 +300,13 @@ function dodgeCounter()
 			//ecraser dom GrossePatate
 			makeBubble(BubblePlayerContent, "fa fa-hand-lizard-o", playerBubbleChoice);
 			makeBubble(BubbleRivalContent, "fa fa-hand-rock-o", RivalBubbleChoice);
-			textPlayer.textContent = "Kame Sennin dodges and counters like a master !";
-			textRival.textContent = "Ken stroke the wind like a noob !";
+			infoTextUp.textContent = "Kame Sennin dodges and counters like a master !";
+			infoTextDown.textContent = "Ken stroke the wind like a noob !";
 			break;
 		case 3:
 			makeBubble(BubbleRivalContent, "fa fa-hand-lizard-o", RivalBubbleChoice);
-			textPlayer.textContent = "Duellists defend at the same time...";
-			textRival.textContent = "Pussies..."
+			infoTextUp.textContent = "Duellists defend at the same time...";
+			infoTextDown.textContent = "Pussies...";
 			break;
 	}
 	deathOrGlory();
@@ -302,6 +316,9 @@ function dodgeCounter()
 
 /************ CODE PRINCIPAL **************/
 
+//infos joueurs et rival
+statePlayer.textContent = "- PLAYER - HP : " + player.pv + " STR : " + player.att;
+stateRival.textContent = "- CPU - HP : " + rival.pv + " STR : " + rival.att;
 
 //GAME : Bouton cliquable
 quickStrikePlayer.addEventListener('click', attackPlayer);
@@ -317,4 +334,85 @@ playerBubbleChoice.addEventListener('transitionend', function()
 RivalBubbleChoice.addEventListener('transitionend', function()
 {
 	this.classList.remove('bubble');
+});
+
+
+//Dissuation
+formScore.addEventListener("submit", function(e)
+{
+	if (inputScoreHidden.value != totalScore)
+	{
+		e.preventDefault();
+	}
+});
+
+var victoryPlayerBubble = document.querySelector('aside div:nth-of-type(2)');
+var victoryRivalBubble = document.querySelector('aside div:nth-of-type(3)');
+
+
+
+/*TESTZONE-TESTZONE-TESTZONE-TESTZONE-TESTZONE-TESTZONE-TESTZONE*/
+
+
+
+victoryPlayerBubble.addEventListener('click', function()
+{
+	//On defait deathOrGlory
+			ken.classList.remove('defeatedRival');
+			quickStrikePlayer.classList.remove('smashedButtonTopKen');
+			grossePatate.classList.remove('smashedButtonMiddleKen');
+			block.classList.remove('smashedButtonBelowKen');
+				//En cas du double chaos
+				kameSennin.classList.remove('defeatedPlayer');
+				grossePatate.classList.remove('smashedButtonMiddleKame');
+			
+	//remplir les barres de vie
+			document.querySelector('.playerLife').style.width = 100 + "%";
+			document.querySelector('.rivalLife').style.width = 100 + "%";
+
+	//redefinir les variables de vie au max
+			player.pv= hpMaxPlayer;
+			rival.pv=hpMaxRival;
+
+	//vider les champs infos article p
+			infoTextUp.textContent =('');
+			infoTextDown.textContent = "";
+			
+	//remises des elements du score à zero
+			score = 0;
+			clicCount = 0;
+			totalScore = 0;
+			
+	//effacer le contenu de score info
+			showScoreInP.textContent = "";
+			inputScoreHidden.value = 0;
+			
+	//faire disparaitre le formulaire de score
+			formScore.classList.remove('bubble');
+			
+	//faire disparaitre la bulle de victoire
+			victoryPlayerBubble.classList.remove('bubble');
+	
+});
+
+victoryRivalBubble.addEventListener('click', function()
+{
+			kameSennin.classList.remove('defeatedPlayer');
+			quickStrikePlayer.classList.remove('smashedButtonTopKame');
+			grossePatate.classList.remove('smashedButtonMiddleKame');
+			block.classList.remove('smashedButtonBelowKame');
+			document.querySelector('.playerLife').style.width = 100 + "%";
+			document.querySelector('.rivalLife').style.width = 100 + "%";
+			player.pv= hpMaxPlayer;
+			rival.pv=hpMaxRival;
+			infoTextUp.textContent =('');
+			infoTextDown.textContent = "";
+			score = 0;
+			clicCount = 0;
+			totalScore = 0;
+			showScoreInP.textContent = "";
+			inputScoreHidden.value = 0;
+			formScore.classList.remove('bubble');
+			victoryRivalBubble.classList.remove('bubble');
+	
 });

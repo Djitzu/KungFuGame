@@ -1,5 +1,5 @@
 <?php
-require_once'../01-model/connexion.php';
+require_once'connexion.php';
 
 class DataConnexion extends Request
 {

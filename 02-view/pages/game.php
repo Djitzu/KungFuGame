@@ -24,6 +24,15 @@
 					<i aria-hidden="true"></i>
 				</div>
 				
+				<!--Victoire joueur-->
+				<div>
+					Again ?
+				</div>
+				<!--Victoire rival-->
+				<div>
+					More ?!
+				</div>
+				
 				<!--RIVAL-->
 				<img src="02-view/image/ken.jpg" alt="Rival">
 				
@@ -54,19 +63,19 @@
 					<!--Rival-->
 				
 				<!--Formulaire contenant le score z-index opacity:0 ...-->
-			
-				<form action="03-controler/send-score.php" method="post" >
-					<label for="score">Your score is :</label>
-					<p></p>
-					<input for="score" type="hidden" name="score"/>
-					<input type="submit" value="Save my score !"/>
-				</form>
+				<?php if($_SESSION['pseudo']): ?>
+					<form action="03-controler/send-score.php" method="post" >
+						<p></p>
+						<input for="score" type="hidden" name="score"/>
+						<input type="submit" value="Save my score !"/>
+					</form>
+				<?php endif; ?>
 				
-				
-					<!--Ecire le score dans le p et dans l'input hidden afin que le joueur ne puisse le modifier.-->
 			</article>
 			
-			
+			<audio controls="controls" loop autoplay>
+				<source src="02-view/music/guileTheme.mp3"/>
+			</audio>
 		</main>
 	</body>
 		<script type="text/javascript" src="02-view/js/game.js"></script>

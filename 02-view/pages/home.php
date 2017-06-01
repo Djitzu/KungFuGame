@@ -1,4 +1,10 @@
 	<main>
+			<!--Si le joueur est conencté-->
+			<?php if ($_GET['connexion'] === 'ok') : ?>
+				<a href="index.php?page=game" class="fight">FIGHT NOW !</a>
+		
+			<!--Sinon, formulaire complet-->
+			<?php else : ?>
 				<ul>
 					<!--S'enregistrer-->
 					<li>
@@ -26,6 +32,7 @@
 						<!--FREE TOUR -->
 					<li><a href="index.php?page=game">Anonimous Try</a></li>					
 				</ul>
+			<?php endif; ?>
 
 		</main>
 	</body>

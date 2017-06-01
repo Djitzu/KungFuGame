@@ -4,7 +4,7 @@
 			<h2>This is the scoring page</h1>
 			<p>Let's see who have the bigger !</p>
 			
-			<!--N AFFICHE CE TABLEAU QUE SI USER CONNECTÉ-->
+			<!--AFFICHE CE TABLEAU QUE SI L'UTILISATEUR EST CONNECTÉ-->
 			<?php if(!empty($_SESSION)): ?>
 				<table>
 						<caption>Your score !</caption>
@@ -14,15 +14,11 @@
 					</tr>
 					
 					<?php foreach($allUserScore as $userScore) : ?>
-					<tr>
-						<td><?= date('d/m/Y', strtotime($userScore['date'])) ?></td>
-						<td><?= $userScore['score'] ?></td>
-	
-					</tr>
-				<?php endforeach; ?>
-					
-					
-	
+						<tr>
+							<td><?= date('d/m/Y', strtotime($userScore['date'])) ?></td>
+							<td><?= $userScore['score'] ?></td>
+						</tr>
+					<?php endforeach; ?>
 				</table>
 			<?php endif; ?>
 
@@ -61,8 +57,7 @@
 						<td><?= date('d/m/Y', strtotime($weekScore['date'])) ?></td>
 						<td><?= $weekScore['score']?></td>
 					</tr>
-				<?php endforeach; ?>				
-				
+				<?php endforeach; ?>
 			</table>
 
 		</main>

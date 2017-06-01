@@ -8,6 +8,22 @@
 |___,_||_____||__|__||_____||__|\_||__|__||_____|
                                                  
 
+
+NEEDS :
+	Font :
+		font-family: 'Press Start 2P', cursive;
+		font-family: 'Condiment', cursive;
+	Couleur police :
+		color: rgba(59, 94, 100, 1);
+	Couleur de fond :
+		couleur fond zone de texte : rgba(244,231,203, 0.8);
+	Couleur bordure :
+		lien nav : rgb(59, 94, 100);
+		bouton game : red
+		boite d'info : white
+		images : #7A6643;
+
+
 */
 
 /*POUR UTILISER LES REM FACILEMENT.*/
@@ -233,6 +249,12 @@ h4 {
                                     
 */
 
+/*Bouton "fight Now"@home.php si utilisateur connecté*/
+main>a {
+	position: relative;
+	top: 5rem;
+}
+
 section {
 	flex-direction: column;
 	align-items: center;
@@ -308,26 +330,11 @@ aside img {
 	
 	border: 8px solid #7A6643;
 	border-radius: 5px;
-	transition: 6000ms;
+	transition: 1000ms;
 }
 
 
-/*
-NEW BULLE de bd Player{
-	link for new match = phrase buddies
-}
 
-NEW BULLE de bd Rival{
-	link for new match = phrase buddies
-}
-
-//Afficher le score et permettre de l'enregistrer
-aside form {
-	;
-}
-
-
-*/
 /*
   __                     
  / _|                    
@@ -339,7 +346,7 @@ aside form {
                          
 */
 
-/*INDEX.PHTML*/
+/*HOME.PHP*/
 ul form {
 	visibility: hidden;
 	display: flex;
@@ -347,6 +354,10 @@ ul form {
 	width: 25%;
 	margin: 0 auto;
 	height: 2rem;
+}
+/*GAME.PHP*/
+article form {
+	opacity: 0;
 }
 
 /*
@@ -362,11 +373,11 @@ ul form {
 
 /* EN CAS DE VICTOIRE OU DEFAITE*/
 .defeatedRival {
-	transform: translateX(12000px) rotate(360deg) translateY(250px);
+	transform: translateX(5000px) rotate(360deg) translateY(250px);
 }
 
 .defeatedPlayer {
-	transform: translateX(-12000px) rotate(-360deg) translateY(250px);
+	transform: translateX(-5000px) rotate(-360deg) translateY(250px);
 }
 
 .grow{
@@ -442,6 +453,8 @@ ul form {
 
 
 /*BULLE*/
+
+/*Bulles info action du joueur*/
 aside div {
 	position: absolute;
 	left: 40%;
@@ -465,8 +478,6 @@ aside div {
 	transition: 500ms;
 }
 
-
-
 /*La queue qui dépasse ... ... =='...*/
 aside div:after {
 	content: "";
@@ -484,13 +495,31 @@ aside div:after {
 	-o-transform: rotate(45deg);
 }
 
-/*RIVAL*/
+/*Bulles apparaissant à la victoire du joueur (2) du l'ordi (3)*/
+aside div:nth-of-type(2), aside div:nth-of-type(3) {
+	width : 20%;
+	left: 40%;
+}
+
+aside div:nth-of-type(2):hover, aside div:nth-of-type(3):hover {
+	cursor: pointer;
+}
+
+aside div:nth-of-type(3) {
+	top : 35%;
+}
+
+aside div:nth-of-type(3):after{
+	transform: rotate(220deg);
+	left: 100%;
+}
+
+/*Bulles info action du rival*/
 aside div:last-of-type {
 	left: 55%;
 	top: 35%;
 	box-shadow: -8px -8px 12px black;
 }
-
 
 /*CPU Rotation conteneur et contenu*/
 aside div:last-of-type, aside div:last-of-type i {
@@ -591,6 +620,19 @@ caption, th, td {
 		left: 40%;
 		top: 25%;
 	}
+
+	aside div:nth-of-type(2), aside div:nth-of-type(3) {
+		width : 33%;
+		top:30%;
+	}
+	
+	aside div:nth-of-type(2){
+		left:45%;
+	}
+	
+		aside div:nth-of-type(3){
+		left:25%;
+	}
 	
 	aside div:last-of-type {
     	left: 50%;
@@ -612,7 +654,12 @@ caption, th, td {
 
 @media all and (max-width: 500px)
 {
-	
+	/* Pour Chrome sur moblie, on peut scroller sur la droite mais le centrage se fait à gauche ... ?!?! Navigateur de merde !
+	body {
+		max-width: 500px;
+		overflow: hidden;
+	}
+	*/
 	aside, h4, section {
 		position: relative;
 	}
@@ -716,6 +763,10 @@ caption, th, td {
     width: 40px;
     height: 100px;
     z-index: 1;
+	}
+	
+	aside div:nth-of-type(2), aside div:nth-of-type(3) {
+		width : 40%;
 	}
 	
 	aside div:last-of-type {

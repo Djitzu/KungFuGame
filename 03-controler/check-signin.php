@@ -7,10 +7,6 @@ $pseudo = htmlspecialchars($_POST['pseudo']);
 $password = htmlspecialchars($_POST['password']);
 $password_crypted = md5($password);
 
-var_dump($pseudo);
-var_dump($password_crypted);
-
-
 $connexion = new DataConnexion();
 $user = $connexion->findUser($pseudo, $password_crypted);
 
