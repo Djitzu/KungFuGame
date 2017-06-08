@@ -1,0 +1,720 @@
+/*
+  ____    ___  ____     ___  ____    ____  _     
+ /    |  /  _]|    \   /  _]|    \  /    || |    
+|   __| /  [_ |  _  | /  [_ |  D  )|  o  || |    
+|  |  ||    _]|  |  ||    _]|    / |     || |___ 
+|  |_ ||   [_ |  |  ||   [_ |    \ |  _  ||     |
+|     ||     ||  |  ||     ||  .  \|  |  ||     |
+|___,_||_____||__|__||_____||__|\_||__|__||_____|
+                                                 
+
+
+NEEDS :
+	Font :
+		font-family: 'Press Start 2P', cursive;
+		font-family: 'Condiment', cursive;
+		font-family: Arial;
+	Couleur police :
+		color: rgba(59, 94, 100, 1);
+		About -> color: rgb(91,79,161)
+	Couleur de fond :
+		couleur fond zone de texte : rgba(244,231,203, 0.8);
+		About -> background-color: rgba(252,252,254, 1);
+	Couleur bordure :
+		lien nav : rgb(59, 94, 100);
+		bouton game : red
+		boite d'info : white
+		images : rgb(122,102,67);
+
+
+*/
+
+/*POUR UTILISER LES REM FACILEMENT.*/
+html {
+	font-size: 62.5%;
+}
+
+/*IMAGE ET DEFINITION TAILLE PAGE*/
+body {
+ 	background: url('../image/dojo2.jpg') no-repeat;
+ 	/*background: url('../image/dojo.jpg') no-repeat;*/
+ 	background-size: cover;
+ 	max-width: 1250px;
+ 	margin: auto;
+ 	/*N'aggrandit pas l'écran à l'ejection de des éléments*/
+  	overflow-x:hidden;
+	text-align: center;
+}
+
+/*MISE EN FORME DES ZONDE DE TEXTE*/
+h2, h3, h4, p, a, li {
+	color: white;
+	font-family: 'Press Start 2P', cursive;
+	font-weight: normal;
+}
+
+/*OMBRE SUR LES BOUTONS ET SUR LES IMAGES*/
+aside img, a, main p {
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+/*! FLEXBOX !*/
+nav ul, .states, section, aside {
+	display: flex;
+}
+
+nav ul, main ul {
+	/*Margin a droite permet de centrer vu que la flexbox ne le fait pas :s*/
+	margin: 0 4rem 4rem 0;
+}
+
+
+
+
+/*DEFINITION DES LIENS ET BOUTONS*/
+a {
+	text-decoration: none;
+	padding: 1.5rem;
+	color: rgba(59, 94, 100, 1);
+	border: 2px solid rgb(59, 94, 100);
+	background-color: rgba(244,231,203, 0.8);
+	opacity: 0.8;
+}
+
+a:hover {
+	opacity: 1;
+}
+
+a:active {
+	border: 4px solid white;
+	color: white;
+}
+
+li {
+	list-style: none;
+	margin: 1.2rem 0;
+}
+
+/*
+
+ __ __    ___   ____  ___      ___  ____  
+|  |  |  /  _] /    ||   \    /  _]|    \ 
+|  |  | /  [_ |  o  ||    \  /  [_ |  D  )
+|  _  ||    _]|     ||  D  ||    _]|    / 
+|  |  ||   [_ |  _  ||     ||   [_ |    \ 
+|  |  ||     ||  |  ||     ||     ||  .  \
+|__|__||_____||__|__||_____||_____||__|\_|
+                                          
+
+*/
+
+/*TITRE SUPER KITSCH*/
+h1 {
+	font-family: 'Condiment', cursive;
+	font-size: 4rem;
+	color: red;
+	text-shadow: 0 1px 0 #eee,
+             0 2px 0 #e5e5e5,
+             -1px 3px 0 #C8C8C8,
+             -1px 4px 0 #C1C1C1,
+             -2px 5px 0 #B9B9B9,
+             -2px 6px 0 #B2B2B2,
+             -2px 7px 2px rgba(0,0,0, 0.6),
+             -2px 7px 8px rgba(0,0,0, 0.2),
+             -2px 7px 45px rgba(0,0,0, 0.4);
+}
+
+/*PLUS DE KITSCH : Blink Fury*/
+h1 span {
+	animation: 0.6s 4 blink;
+}
+
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+nav ul {
+	justify-content: center;
+}
+
+/*Instructions & Credit*/
+nav aside {
+	flex-direction: column;
+	position: absolute;
+	/*pour centrer l'élément*/
+	left: 0; 
+  	right: 0; 
+	width: 70%;
+	margin: auto;
+	z-index: 2;
+	text-align: left;
+	background-color: rgba(252,252,254, 1);
+	box-shadow: 
+
+             1px 1px 0 rgb(208, 208, 244),
+             2px 2px 0 #C8C8C8,
+             3px 3px 0 rgb(208, 208, 244),
+             4px 4px 0 rgb(168, 168, 183),
+             5px 5px 0 rgb(178, 178, 178),
+             6px 6px 0 rgb(208, 208, 244),
+             7px 7px 0 rgb(208, 208, 244),
+             8px 8px 0 rgb(168, 168, 183),
+             9px 9px 6px black;
+	visibility: hidden;
+}
+
+nav aside p, nav aside li, nav h5{
+	/*color: rgba(59, 94, 100, 0.9);*/
+	color:rgb(91,79,161);
+	font-family: 'Arial', cursive;
+	font-size: 1.5rem;
+}
+
+nav aside ul {
+	/*doublons l 133*/
+	flex-direction: column;
+}
+
+nav aside li {
+	list-style-type: disc;
+}
+
+nav aside h5:first-of-type{
+	margin-top: 0;
+}
+
+nav aside p:last-of-type{
+	margin-bottom: 0;
+}
+
+nav aside li, nav aside ul, nav aside p:not(:last-of-type) {
+	/*font-size: 1.3rem;*/
+	/*font-family: 'Press Start 2P', cursive;*/
+	margin: 0;
+}
+
+
+
+/*
+ ___ ___   ____  ____  ____  
+|   |   | /    ||    ||    \ 
+| _   _ ||  o  | |  | |  _  |
+|  \_/  ||     | |  | |  |  |
+|   |   ||  _  | |  | |  |  |
+|   |   ||  |  | |  | |  |  |
+|___|___||__|__||____||__|__|
+                             
+
+		 _ _  __     _                
+		| (_)/ _|   | |               
+		| |_| |_ ___| |__   __ _ _ __ 
+		| | |  _/ _ \ '_ \ / _` | '__|
+		| | | ||  __/ |_) | (_| | |   
+		|_|_|_| \___|_.__/ \__,_|_|   
+		                              
+                              
+*/
+
+
+/*LIFEBAR PREMIER CONTENEUR*/
+.states {
+	justify-content: space-around;
+	height: 30px;
+	width: 100%;
+}
+
+/*REPRÉSENTE HP MAX*/
+.playerBar, .rivalBar {
+	border: 2px solid white;
+	border-radius: 2px;
+	width: 50rem;
+	height: 100%;
+	margin : 0 1rem;
+}
+
+/*LA PARTIE DONT LA WIDTH SE REDUIRA A FIL DES COUPS RECUS*/
+.playerLife, .rivalLife {
+	max-width: 100%;
+	height: 100%;
+	background-color: green;
+	transition: width 500ms;
+	transition-timing-function: ease-in;
+}
+
+/*Retourne la barre de vie du rival*/
+.rivalBar{
+	transform: rotate(180deg);
+}
+
+/*
+		     _        _       
+		    | |      | |      
+		 ___| |_ __ _| |_ ___ 
+		/ __| __/ _` | __/ __|
+		\__ \ || (_| | |_\__ \
+		|___/\__\__,_|\__|___/
+		                      
+                      
+*/
+
+h4 {
+	width : 50%;
+	display: inline-block;
+}
+
+/*
+		 _           _   _                  
+		| |         | | | |                 
+		| |__  _   _| |_| |_ ___  _ __  ___ 
+		| '_ \| | | | __| __/ _ \| '_ \/ __|
+		| |_) | |_| | |_| || (_) | | | \__ \
+		|_.__/ \__,_|\__|\__\___/|_| |_|___/
+		                                    
+                                    
+*/
+
+section {
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5rem;
+	position: absolute;
+	top: 20%;
+	left: 0;
+	right: 0;
+}
+
+/*bouttons du jeu, hérite ligne 50*/
+section a {
+	width: 10%;
+	border: 4px solid red;
+	padding: 0.9rem;
+	margin: 1rem;
+	font-size: 2rem;
+	border-radius: 4px 25px;
+	transition: 500ms;
+}
+
+/*
+		 _        __                                      
+		(_)      / _|                                     
+		 _ _ __ | |_ ___   __ _  __ _ _ __ ___   ___  ___ 
+		| | '_ \|  _/ _ \ / _` |/ _` | '_ ` _ \ / _ \/ __|
+		| | | | | || (_) | (_| | (_| | | | | | |  __/\__ \
+		|_|_| |_|_| \___/ \__, |\__,_|_| |_| |_|\___||___/
+		                   __/ |                          
+		                  |___/                           
+*/
+
+article p {
+	font-size: 1rem;
+	color: blue;
+	font-weight: bold;
+	background-color: rgba(244,231,203, 0.8);
+	width: 40%;
+	margin: 1rem auto;
+	padding: 2rem;
+	border : 2px solid white;
+	border-radius: 2px;
+}
+
+/*
+		 _                                 
+		(_)                                
+		 _ _ __ ___   __ _  __ _  ___  ___ 
+		| | '_ ` _ \ / _` |/ _` |/ _ \/ __|
+		| | | | | | | (_| | (_| |  __/\__ \
+		|_|_| |_| |_|\__,_|\__, |\___||___/
+		                    __/ |          
+		                   |___/           
+*/
+
+
+/*PLACEMENT TRANSITION*/
+aside {
+	justify-content: space-around;
+	z-index: -1;
+}
+
+aside img {
+	
+	/*pour eviter la déformation par chrome gérant mal la flexbox*/
+	width: 18rem;
+	height: 18rem;
+	/*18%*/
+	
+	
+	border: 8px solid rgb(122,102,67);
+	border-radius: 5px;
+	transition: 1000ms;
+}
+
+
+
+/*
+  __                     
+ / _|                    
+| |_ ___  _ __ _ __ ___  
+|  _/ _ \| '__| '_ ` _ \ 
+| || (_) | |  | | | | | |
+|_| \___/|_|  |_| |_| |_|
+                         
+                         
+*/
+
+/*HOME.PHP*/
+ul form {
+	visibility: hidden;
+	display: flex;
+	flex-direction: column;
+	width: 25%;
+	margin: 0 auto;
+	height: 2rem;
+}
+/*GAME.PHP*/
+article form {
+	opacity: 0;
+}
+
+
+/*
+
+ ____  _  _  __    __    ____    ____  ____       
+(  _ \/ )( \(  )  (  )  (  __)  (  _ \(    \      
+ ) _ () \/ (/ (_/\/ (_/\ ) _)    ) _ ( ) D (      
+(____/\____/\____/\____/(____)  (____/(____/      
+
+*/
+
+
+/*BULLE*/
+
+/*Bulles info action du joueur*/
+aside div {
+	position: absolute;
+	left: 40%;
+	top: 28%;
+	width: 100px;
+	height: 100px;
+	background: white;
+	-moz-border-radius: 100px / 50px;
+	-webkit-border-radius: 100px / 50px;
+	border-radius: 110px / 120px;
+	border-top: 9px solid transparent;
+	box-shadow: 8px 8px 12px black;
+	text-align: center;
+	line-height: 9rem;
+	font-size: 4rem;
+	color: rgba(59, 94, 100, 1);
+	opacity: 0;
+	transition: 500ms;
+}
+
+/*La queue qui dépasse ... ... =='...*/
+aside div:after {
+	content: "";
+	position: absolute;
+	border: 0 solid transparent;
+	border-top: 15px solid white;
+	border-radius: 200px 0 0 0;
+	top: -20px;
+	left: -85px;
+	width: 60px;
+	height: 120px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+}
+
+/*Bulles apparaissant à la victoire du joueur (2) du l'ordi (3)*/
+aside div:nth-of-type(2), aside div:nth-of-type(3) {
+	width : 20%;
+	left: 40%;
+}
+
+aside div:nth-of-type(2):hover, aside div:nth-of-type(3):hover {
+	cursor: pointer;
+}
+
+aside div:nth-of-type(3) {
+	top : 35%;
+}
+
+aside div:nth-of-type(3):after{
+	transform: rotate(220deg);
+	left: 100%;
+}
+
+/*Bulles info action du rival*/
+aside div:last-of-type {
+	left: 55%;
+	top: 35%;
+	box-shadow: -8px -8px 12px black;
+}
+
+/*CPU Rotation conteneur et contenu*/
+aside div:last-of-type, aside div:last-of-type i {
+	transform: rotate(180deg);
+}
+
+
+
+
+/*
+  __                                            .__                
+_/  |_  ____   _____ ______   ________________  |__|______   ____  
+\   __\/ __ \ /     \\____ \ /  _ \_  __ \__  \ |  \_  __ \_/ __ \ 
+ |  | \  ___/|  Y Y  \  |_> >  <_> )  | \// __ \|  ||  | \/\  ___/ 
+ |__|  \___  >__|_|  /   __/ \____/|__|  (____  /__||__|    \___  >
+           \/      \/|__|                     \/                \/ 
+
+
+*/
+
+/*SCORE*/
+table {
+	color : white;
+	width: 50%;
+	margin: 4rem auto;
+}
+
+td:last-of-type{
+	animation: 0.6s 1 vortex;
+	
+}
+
+/*Si plusieurs anim, les ranger au même endroit.*/
+@keyframes vortex {
+	0% {
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(1080deg);
+	}
+}
+
+caption, th, td {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+
+
+/*
+
+ ___ ___    ___  ___    ____   ____       ___   __ __    ___  ____   ____    ___  _____
+|   |   |  /  _]|   \  |    | /    |     /   \ |  |  |  /  _]|    \ |    |  /  _]/ ___/
+| _   _ | /  [_ |    \  |  | |  o  |    |     ||  |  | /  [_ |  D  ) |  |  /  [_(   \_ 
+|  \_/  ||    _]|  D  | |  | |     |    |  Q  ||  |  ||    _]|    /  |  | |    _]\__  |
+|   |   ||   [_ |     | |  | |  _  |    |     ||  :  ||   [_ |    \  |  | |   [_ /  \ |
+|   |   ||     ||     | |  | |  |  |    |     ||     ||     ||  .  \ |  | |     |\    |
+|___|___||_____||_____||____||__|__|     \__,_| \__,_||_____||__|\_||____||_____| \___|
+
+
+				
+				
+				  _          _                  ___    __ _____           
+				 | |        | |                / _ \  / /| ____|          
+				 | |__   ___| | _____      __ | (_) |/ /_| |__  _ ____  __
+				 | '_ \ / _ \ |/ _ \ \ /\ / /  > _ <| '_ \___ \| '_ \ \/ /
+				 | |_) |  __/ | (_) \ V  V /  | (_) | (_) |__) | |_) >  < 
+				 |_.__/ \___|_|\___/ \_/\_/    \___/ \___/____/| .__/_/\_\
+				                                               | |        
+				                                               |_|        
+				
+				                                                                                     
+*/
+
+@media all and (max-width: 865px)
+{
+	/*boutons alignés retrouvent leur place d'origine*/
+	section {
+		position: inherit;
+		flex-direction: row;
+		justify-content: center;
+	}
+	
+	section a {
+		width : 20%;
+		background-size: cover;
+		padding: 2rem;
+	}
+	
+	article {
+		position: inherit;
+	}
+	
+	/*Bulles*/
+	aside div{
+		left: 40%;
+		top: 25%;
+	}
+
+	aside div:nth-of-type(2), aside div:nth-of-type(3) {
+		width : 33%;
+		top:30%;
+	}
+	
+	aside div:nth-of-type(2){
+		left:45%;
+	}
+	
+		aside div:nth-of-type(3){
+		left:25%;
+	}
+	
+	aside div:last-of-type {
+    	left: 50%;
+    	top: 35%;
+	}
+}
+
+
+/*
+					  _          _                 _____  ___   ___            
+					 | |        | |               | ____|/ _ \ / _ \           
+					 | |__   ___| | _____      __ | |__ | | | | | | |_ ____  __
+					 | '_ \ / _ \ |/ _ \ \ /\ / / |___ \| | | | | | | '_ \ \/ /
+					 | |_) |  __/ | (_) \ V  V /   ___) | |_| | |_| | |_) >  < 
+					 |_.__/ \___|_|\___/ \_/\_/   |____/ \___/ \___/| .__/_/\_\
+					                                                | |        
+					                                                |_|        
+*/
+
+@media all and (max-width: 500px)
+{
+	/* Pour Chrome sur moblie, on peut scroller sur la droite mais le centrage se fait à gauche ... ?!?! Navigateur de merde !
+	body {
+		max-width: 500px;
+		overflow: hidden;
+	}
+	*/
+	aside, h4, section, audio:first-of-type {
+		position: relative;
+	}
+	
+	h1 {
+		font-size: 2.8rem;
+	}
+	
+	/*Permettre à la nav d'aller à la ligne*/
+	nav ul {
+		flex-wrap: wrap;
+	}
+	
+	nav ul li {
+		margin: 1.9rem 0;
+	}
+	
+	/*Décalage des instructions pour pouvoir recliquer sur about^^ Prévoir Ajout d'un bouton ???*/
+	nav aside {
+		top: 18rem;
+	}
+	
+	/*Mise en colones et nouvelle height*/
+	.states, aside {
+		height: 30rem;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	/*Nouvelle width barre de vie et aside*/
+	.playerBar, .rivalBar, aside {
+		width: 95%;
+		margin : 0 auto;
+	}
+	
+	/*Redefinition height des barre de vie sinon elles prennent toute la place.*/
+	.playerBar, .rivalBar {
+		height: 30px;
+	}
+	
+	/*Superpostion de l'aside sur boite barre de vie*/
+	aside {
+		height: 20rem;
+		top: -29.7rem;
+	}
+	
+	/*Redéfinition width et border des images.*/
+	aside img {
+		width: 10rem;
+		height: 10rem;
+		border: 4px solid #7A6643;
+	}
+	
+	/*Image rival décalée à droite*/
+	aside img:last-of-type {
+		align-self: flex-end;
+	}
+	
+	/*Repositionnement des stats des joueurs*/
+	h4 {
+	    top: -30.2rem;
+	    display: block;
+	    width: auto;
+	    font-size: 0.6rem;
+	}
+	
+	h4:last-of-type {
+		top: -5rem;
+	}
+	
+	/*Repositionnement des boutons de jeu*/
+	section {
+		margin: 0;
+		top: -47.1rem;
+		left: 6rem;
+	}
+	
+	/*Redéfinition des boutons*/
+	section a {
+		width: auto;
+		font-size: 1.4rem;
+		border-radius: 100px;
+		border : 2px solid red;
+		margin: 0 0.2rem;
+	}
+	
+	
+	/*Redéfinitions bulles de bd*/
+	aside div {
+		line-height: 1.5;
+		left: 35%;
+		top: 42%;
+		width: 50px;
+		height: 50px;
+		font-size: 3rem;
+	}
+	
+	aside div:after{
+	top: -35px;
+    left: -55px;
+    width: 40px;
+    height: 100px;
+    z-index: 1;
+	}
+	
+	aside div:nth-of-type(2), aside div:nth-of-type(3) {
+		width : 40%;
+	}
+	
+	aside div:last-of-type {
+    left: 50%;
+    top: 70%;
+	}
+	
+	article{
+		position: relative;
+		top: -29rem;
+	}
+	
+	audio:first-of-type {
+		bottom: 25rem;
+	}
+}
