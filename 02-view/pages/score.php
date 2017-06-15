@@ -2,7 +2,7 @@
 
 		<main>
 			<h2>This is the scoring page</h1>
-			<p>Let's see who have the bigger !</p>
+			<h4>Let's see who have the bigger !</h4>
 			
 			<!--AFFICHE CE TABLEAU QUE SI L'UTILISATEUR EST CONNECTÉ-->
 			<?php if(!empty($_SESSION)): ?>

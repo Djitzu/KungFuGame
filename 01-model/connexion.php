@@ -6,7 +6,7 @@ abstract class Request
     protected $db;
     protected $tableName;
 
-    /*constructeur permet de créer la connexion*/
+    /*constructeur permet d'établir la connexion à la création de l'objet*/
     public function __construct()
     {
         try{
@@ -19,17 +19,6 @@ abstract class Request
                 );
         }
     }
-    
-    /*abstract function findAll();*/
-    /*récupérer 1 élément -> FETCH*/    /*
-    public function findOne($id)
-    {
-        $resultat = $this->db->query("SELECT * FROM $this->tableName WHERE id = :id");
-        $resultat->bindParam(':id', $id);
-        return $resultat->fectch(PDO::FETCH_ASSOC);
-    }
-    */
-    /*CF worksapce poo-trainning/CLASSPHP si besoin de plus*/
 }
 
 

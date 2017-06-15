@@ -55,18 +55,18 @@
 				<p></p>
 				<p></p>
 				
-				<!--Formulaire contenant le score z-index opacity:0 ...-->
+				<!--Formulaire contenant le score-->
 				<?php if($_SESSION['pseudo']): ?>
 					<form action="03-controler/send-score.php" method="post" >
 						<p></p>
 						<input for="score" type="hidden" name="score"/>
-						<input type="submit" value="Save my score !"/>
+						<input type="submit" value="save my score"/>
 					</form>
 				<?php endif; ?>
 				
 			</article>
 			
-			<audio source src="02-view/music/guileTheme.mp3" controls="controls" loop preload="auto"></audio>
+			<audio source src="02-view/music/guileTheme.mp3" controls="controls" preload="auto" autoplay loop></audio>
 			<audio src="02-view/sounds/slap.mp3"></audio>
 			<audio src="02-view/sounds/right-cross.mp3"></audio>
 			<audio src="02-view/sounds/kick.mp3"></audio>

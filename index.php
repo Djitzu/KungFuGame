@@ -19,7 +19,7 @@ if ($_GET['page'] === 'home' && $_GET['inscription'] === 'ok')
 if ($_GET['page'] === 'home' && $_GET['connexion'] === 'ok')
 {
     session_start();
-    echo'<h1>Good to see you ' . $_SESSION['pseudo'] .  ' ! Push Game Button just Above !</h1>';
+    echo'<h1>Good to see you ' . $_SESSION['pseudo'] .  ' ! Push Game Button !</h1>';
 } elseif ($_GET['page'] === 'home' && $_GET['connexion'] === 'error') {
     echo'<h1>Oops ! Wrong login or password.</h1>';
 }

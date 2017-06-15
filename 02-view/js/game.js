@@ -1,6 +1,31 @@
 //FICHIER GÉRANT LE SYSTEME DE JEU GAME.PHP
 
+/************************************************/
+/******************* CONTENT ********************/
+/************************************************/
 
+/*
+DONNEES -------------------------->  32
+FONCTIONS ------------------------>  97
+    ->dice ---------------------------> 102
+    ->lifeBarHited -------------------> 110
+    ->makeBubble (bulle BD) ----------> 119
+    ->Quick Slap ---------------------> 127
+    ->Grosse Patate ------------------> 154
+    ->rivalChoice() ------------------> 164
+    -> deathOrGlory ------------------> 180
+Different round cases ------------> 256
+    ->attackPlayer() -----------------> 258
+    ->heavyAttackPlayer() ------------> 288
+    ->dodgeCounter() -----------------> 316
+CODE PRINCIPAL -------------------> 354
+    ->generate stats -----------------> 356
+    ->clickables buttons -------------> 360
+    ->Dispariton bulle de bd ---------> 365
+    ->dissuation ---------------------> 377
+    ->Victory's bubble ---------------> 387
+    ->Defeat's bubble ----------------> 428
+*/
 
 /************************************************/
 /******************* DONNEES ********************/
@@ -29,7 +54,6 @@ var formScore = document.querySelector('article form');
 var inputScoreHidden = document.querySelector('article form input[type="hidden"]');
 var showScoreInP = document.querySelector('form p');
 
-
 // Boutons
 var quickStrikePlayer = document.querySelector('section a:first-of-type');
 var grossePatate = document.querySelector('section a:nth-of-type(2)');
@@ -55,8 +79,17 @@ var playerBubbleChoice = document.querySelector('aside div:first-of-type');
 var RivalBubbleChoice = document.querySelector('aside div:last-of-type');
 var BubblePlayerContent = document.querySelector('aside div:first-of-type i');
 var BubbleRivalContent = document.querySelector('aside div:last-of-type i');
+var victoryPlayerBubble = document.querySelector('aside div:nth-of-type(2)');
+var victoryRivalBubble = document.querySelector('aside div:nth-of-type(3)');
 
-
+/*Sound FX*/
+var slapSound = document.querySelector("audio:nth-of-type(2)");
+var punchSound = document.querySelector("audio:nth-of-type(3)");
+var counterSound = document.querySelector("audio:nth-of-type(4)");
+var toastySound = document.querySelector("audio:nth-of-type(5)");
+var screamingSound = document.querySelector("audio:last-of-type");
+slapSound.volume=0.5;
+punchSound.volume=1;
 
 
 /***********************************************/
@@ -65,7 +98,7 @@ var BubbleRivalContent = document.querySelector('aside div:last-of-type i');
 
 
 
-// Fonction générant un nombre entier entre un mini et un max inclus
+// Fonction générant un nombre entier entre un mini et un maxi inclus
 function dice(min, max)
 {
   min = Math.ceil(min);
@@ -90,7 +123,7 @@ function makeBubble (element1, attack, element2)
 }
 
 
-// --------------------LIGHT ATTACK
+// --------------------LIGHT ATTACK (Paper/Quick slap)
 function attackRival()
 {
 	var damage = dice(1, 6) + rival.att;
@@ -108,9 +141,6 @@ function attackRival()
 
 function lightAttackPlayer()
 {
-	
-	
-	//MODIF ICI  !!!!!!!!!!!!!!!!!!!!!
 	var damage = dice(1, 6) + player.att;
 	rival.pv -= damage;
 	lifeBarHited(rival.pv, hpMaxRival, hpRival);
@@ -120,7 +150,7 @@ function lightAttackPlayer()
 
 
 
-//---------------------HEAVY ATTACK
+//---------------------HEAVY ATTACK (Rock/Grosse Patate)
 function heavyAttackRival()
 {
 	var damage = (dice(1, 6) + rival.att) *2;
@@ -189,7 +219,7 @@ function deathOrGlory()
 			inputScoreHidden.value = totalScore;
 			
 			//Apparition du formulaire contenant le score
-			formScore.classList.add('bubble');
+			formScore.classList.add('appearSubmit');
 			
 			victoryPlayerBubble.classList.add('bubble');
 			
@@ -224,30 +254,6 @@ function deathOrGlory()
 
 //---------------------GESION DES DIFFERENTS CAS DE ROUND
 
-
-
-/*TEST-ZONE-TEST-ZONE-TEST-ZONE-TEST-ZONE-TEST-ZONE-TEST-ZONE-*/
-
-
-var slapSound = document.querySelector("audio:nth-of-type(2)");
-var punchSound = document.querySelector("audio:nth-of-type(3)");
-var counterSound = document.querySelector("audio:nth-of-type(4)");
-var toastySound = document.querySelector("audio:nth-of-type(5)");
-var screamingSound = document.querySelector("audio:last-of-type");
-slapSound.volume=0.5;
-punchSound.volume=1;
-
-/*
-punchSound.play(); l283 et 316
-counterSound.play(); l324
-toastySound.play(); l325
-screamingSound.play(); l 175
-*/
-
-/*TEST-ZONE-TEST-ZONE-TEST-ZONE-TEST-ZONE-TEST-ZONE-TEST-ZONE-*/
-
-
-
 //SI LE JOUEUR CLIQUE SUR "QUICK SLAP (Paper)"
 function attackPlayer()
 {
@@ -266,7 +272,7 @@ function attackPlayer()
 				lightAttackPlayer();
 				break;
 			case 3:
-				var damage = (dice(1, 6) + player.att) /2;
+				var damage = (dice(1, 6) + player.att) *2;
 				rival.pv -= damage;	
 				lifeBarHited(rival.pv, hpMaxRival, hpRival);
 				makeBubble(BubblePlayerContent, "fa fa-hand-paper-o",playerBubbleChoice);
@@ -307,7 +313,6 @@ function heavyAttackPlayer()
 
 
 //SI LE JOUEUR CLIQUE SUR "DEFEND"
-
 function dodgeCounter()
 {
 	clicCount++;
@@ -316,7 +321,7 @@ function dodgeCounter()
 	{
 		case 1:
 			slapSound.play(); /*<-----------------------*/
-			var damage = (dice(1, 6) + rival.att) /2;
+			var damage = (dice(1, 6) + rival.att) *2;
 			player.pv -= damage;
 			lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
 			makeBubble(BubbleRivalContent, "fa fa-hand-paper-o", RivalBubbleChoice);
@@ -347,11 +352,11 @@ function dodgeCounter()
 
 /************ CODE PRINCIPAL **************/
 
-//infos joueurs et rival
+//infos player & rival(cpu)
 statePlayer.textContent = "- PLAYER - HP : " + player.pv + " STR : " + player.att;
 stateRival.textContent = "- CPU - HP : " + rival.pv + " STR : " + rival.att;
 
-//GAME : Bouton cliquable
+//GAME : Clickable button
 quickStrikePlayer.addEventListener('click', attackPlayer);
 grossePatate.addEventListener('click', heavyAttackPlayer);
 block.addEventListener('click', dodgeCounter);
@@ -377,13 +382,7 @@ formScore.addEventListener("submit", function(e)
 	}
 });
 
-
-
-/*A ranger*/
-var victoryPlayerBubble = document.querySelector('aside div:nth-of-type(2)');
-var victoryRivalBubble = document.querySelector('aside div:nth-of-type(3)');
-
-
+//Bulle de victoire ou de double ko
 victoryPlayerBubble.addEventListener('click', function()
 {
 	//On defait deathOrGlory
@@ -417,13 +416,14 @@ victoryPlayerBubble.addEventListener('click', function()
 			inputScoreHidden.value = 0;
 			
 	//faire disparaitre le formulaire de score
-			formScore.classList.remove('bubble');
+			formScore.classList.remove('appearSubmit');
 			
 	//faire disparaitre la bulle de victoire
 			victoryPlayerBubble.classList.remove('bubble');
 	
 });
 
+//bulle de défaite
 victoryRivalBubble.addEventListener('click', function()
 {
 			kameSennin.classList.remove('defeatedPlayer');
@@ -441,7 +441,6 @@ victoryRivalBubble.addEventListener('click', function()
 			totalScore = 0;
 			showScoreInP.textContent = "";
 			inputScoreHidden.value = 0;
-			formScore.classList.remove('bubble');
 			victoryRivalBubble.classList.remove('bubble');
 	
 });

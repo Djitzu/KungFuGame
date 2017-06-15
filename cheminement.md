@@ -5,17 +5,51 @@
  /  \ ||  :  ||  |  |  _  |
  \    ||     ||  |  |  |  |
   \___| \__,_||__|  |__|__|
-                           
 
+
+15/06/2017
+Bug bande blanche en partie résolue : image trop pixelisée ous smartphone.
+Augemtation des dégats de la giffle (x2) contre la défense game.js : l275 et l324
+
+14/06/2017
+Grosse avancée sur l'article Git. ne manque que git Flow.
+modif lien admin
+ajouts form recherche sur index.html
+
+13/06/2017
+Partie admin
+Une page montrant toute la liste des membres
+Une page montrant un membre et tous ses scores
+Une page parametre
+
+
+                           
+09/06/2017
+finir de styliser form home.php
+finir styiliser bouton form game.php
+responsive
+création de sommaire dans style.css et game .js
+création d'un nouveau fichier js spécifique à l'About
+If en php dans home.php : ne charger l' index.js que si l'utilisateur n'est pas connecté.
+Nettoyage du code
+A faire :
+issues : bug affichage chrome mobile (lundi)
+
+08/06/2017
+fait :
+styliser : formulaire :
+	-page accueil : (smartphone)
+	-game.php : save score
+accordéon sur les form de home.php
+ajout d'un rmerciement : beta-testeurs
+	
+
+07/06/217
 Correction affichage : position relative aggrandissait la page. Résolu pour tablette, partiellement pour smartphone (relatvie conservé car trop d'imbrications)
 nouveau fichier css contenant les classes js
 ajout d'effet sonore et de musique
 aside styliser et fini
 
-styliser : formulaire :
-	-page accueil : (smartphone)
-	-game.php : save score
-	
 styliser : tableau score
 
 

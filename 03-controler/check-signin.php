@@ -23,16 +23,4 @@ if (!$user)
   echo 'vous êtes connecté !';
 }
 
-//ALLER CHERCHER LE MOT DE PASS HASHE DANS LA BDD et le stocker dans $hash
-
-
-//UTILISER 
-/*
-if (password_verify($password, $hash)) {
-    echo 'Le mot de passe est valide !';
-} else {
-    echo 'Le mot de passe est invalide.';
-}
-*/
-//voir pourquoi les scores ne s'affichent plus =='
 ?>

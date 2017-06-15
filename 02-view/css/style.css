@@ -1,18 +1,39 @@
 /*
-  ____    ___  ____     ___  ____    ____  _     
- /    |  /  _]|    \   /  _]|    \  /    || |    
-|   __| /  [_ |  _  | /  [_ |  D  )|  o  || |    
-|  |  ||    _]|  |  ||    _]|    / |     || |___ 
-|  |_ ||   [_ |  |  ||   [_ |    \ |  _  ||     |
-|     ||     ||  |  ||     ||  .  \|  |  ||     |
-|___,_||_____||__|__||_____||__|\_||__|__||_____|
-                                                 
+ _____             _             _   
+/  __ \           | |           | |  
+| /  \/ ___  _ __ | |_ ___ _ __ | |_ 
+| |    / _ \| '_ \| __/ _ \ '_ \| __|
+| \__/\ (_) | | | | ||  __/ | | | |_ 
+ \____/\___/|_| |_|\__\___|_| |_|\__|
+                                     
+GENERAL------------------->  50
+HEADER--------------------> 140
+MAIN----------------------> 240
+    ->lifebar----------------> 250
+    ->stats------------------> 292
+    ->buttons----------------> 307
+    ->infogames--------------> 330
+    ->images-----------------> 355
+    ->bulles bd--------------> 286
+    ->formulaire-------------> 466
+    ->tableau----------------> 538
+MEDIA QUERIES-------------> 579
+    ->below 865px-------------> 588
+    ->below 500px-------------> 655
+CLASSES JS----------------> 808
 
+ _   _               _     
+| \ | |             | |    
+|  \| | ___  ___  __| |___ 
+| . ` |/ _ \/ _ \/ _` / __|
+| |\  |  __/  __/ (_| \__ \
+\_| \_/\___|\___|\__,_|___/
+                           
 
-NEEDS :
 	Font :
 		font-family: 'Press Start 2P', cursive;
 		font-family: 'Condiment', cursive;
+		font-family: 'Kaushan Script', cursive;
 		font-family: Arial;
 	Couleur police :
 		color: rgba(59, 94, 100, 1);
@@ -26,6 +47,14 @@ NEEDS :
 		boite d'info : white
 		images : rgb(122,102,67);
 
+  ____    ___  ____     ___  ____    ____  _     
+ /    |  /  _]|    \   /  _]|    \  /    || |    
+|   __| /  [_ |  _  | /  [_ |  D  )|  o  || |    
+|  |  ||    _]|  |  ||    _]|    / |     || |___ 
+|  |_ ||   [_ |  |  ||   [_ |    \ |  _  ||     |
+|     ||     ||  |  ||     ||  .  \|  |  ||     |
+|___,_||_____||__|__||_____||__|\_||__|__||_____|
+                                                 
 
 */
 
@@ -37,8 +66,8 @@ html {
 /*IMAGE ET DEFINITION TAILLE PAGE*/
 body {
  	background: url('../image/dojo2.jpg') no-repeat;
- 	/*background: url('../image/dojo.jpg') no-repeat;*/
- 	background-size: cover;
+ 	background-size: 205%;
+    background-position: 50% 10%;
  	max-width: 1250px;
  	margin: auto;
  	/*N'aggrandit pas l'écran à l'ejection de des éléments*/
@@ -53,11 +82,10 @@ h2, h3, h4, p, a, li {
 	font-weight: normal;
 }
 
-/*OMBRE SUR LES BOUTONS ET SUR LES IMAGES*/
-aside img, a, main p {
+/*OMBRE SUR LES BOUTONS, LES IMAGES, FORM ET INPUT*/
+aside img, a, main p, ul form, form input[type=submit]  {
 	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
-
 
 /*! FLEXBOX !*/
 nav ul, .states, section, aside {
@@ -69,16 +97,17 @@ nav ul, main ul {
 	margin: 0 4rem 4rem 0;
 }
 
+/*image de fond des liens, formulaire (home.php) et submit*/
+a, article p, ul form, form input[type=submit] {
+	background-color: rgba(244,231,203, 0.8);
+}
 
-
-
-/*DEFINITION DES LIENS ET BOUTONS*/
+/*DEFINITION DES LIENS ET BOUTONS NAV+HOME.PHP*/
 a {
 	text-decoration: none;
 	padding: 1.5rem;
 	color: rgba(59, 94, 100, 1);
 	border: 2px solid rgb(59, 94, 100);
-	background-color: rgba(244,231,203, 0.8);
 	opacity: 0.8;
 }
 
@@ -86,9 +115,20 @@ a:hover {
 	opacity: 1;
 }
 
-a:active {
+a:active, form input[type=submit]:active {
 	border: 4px solid white;
 	color: white;
+}
+
+/*BOUTONS GAME.PHP*/
+section a, article form input[type=submit] {
+	width: 10%;
+	border: 4px solid red;
+	padding: 0.9rem;
+	margin: 1rem;
+	font-size: 2rem;
+	border-radius: 4px 25px;
+	transition: 500ms;
 }
 
 li {
@@ -156,7 +196,7 @@ nav aside {
 	text-align: left;
 	background-color: rgba(252,252,254, 1);
 	box-shadow: 
-
+		/*Effet notice en papier*/
              1px 1px 0 rgb(208, 208, 244),
              2px 2px 0 #C8C8C8,
              3px 3px 0 rgb(208, 208, 244),
@@ -170,14 +210,12 @@ nav aside {
 }
 
 nav aside p, nav aside li, nav h5{
-	/*color: rgba(59, 94, 100, 0.9);*/
 	color:rgb(91,79,161);
 	font-family: 'Arial', cursive;
 	font-size: 1.5rem;
 }
 
 nav aside ul {
-	/*doublons l 133*/
 	flex-direction: column;
 }
 
@@ -194,8 +232,6 @@ nav aside p:last-of-type{
 }
 
 nav aside li, nav aside ul, nav aside p:not(:last-of-type) {
-	/*font-size: 1.3rem;*/
-	/*font-family: 'Press Start 2P', cursive;*/
 	margin: 0;
 }
 
@@ -289,16 +325,7 @@ section {
 	right: 0;
 }
 
-/*bouttons du jeu, hérite ligne 50*/
-section a {
-	width: 10%;
-	border: 4px solid red;
-	padding: 0.9rem;
-	margin: 1rem;
-	font-size: 2rem;
-	border-radius: 4px 25px;
-	transition: 500ms;
-}
+/*bouttons définis globalement ligne 92*/
 
 /*
 		 _        __                                      
@@ -310,12 +337,14 @@ section a {
 		                   __/ |                          
 		                  |___/                           
 */
+article {
+	padding: 1rem;
+}
 
 article p {
 	font-size: 1rem;
 	color: blue;
 	font-weight: bold;
-	background-color: rgba(244,231,203, 0.8);
 	width: 40%;
 	margin: 1rem auto;
 	padding: 2rem;
@@ -342,43 +371,13 @@ aside {
 }
 
 aside img {
-	
 	/*pour eviter la déformation par chrome gérant mal la flexbox*/
 	width: 18rem;
 	height: 18rem;
 	/*18%*/
-	
-	
 	border: 8px solid rgb(122,102,67);
 	border-radius: 5px;
 	transition: 1000ms;
-}
-
-
-
-/*
-  __                     
- / _|                    
-| |_ ___  _ __ _ __ ___  
-|  _/ _ \| '__| '_ ` _ \ 
-| || (_) | |  | | | | | |
-|_| \___/|_|  |_| |_| |_|
-                         
-                         
-*/
-
-/*HOME.PHP*/
-ul form {
-	visibility: hidden;
-	display: flex;
-	flex-direction: column;
-	width: 25%;
-	margin: 0 auto;
-	height: 2rem;
-}
-/*GAME.PHP*/
-article form {
-	opacity: 0;
 }
 
 
@@ -463,21 +462,90 @@ aside div:last-of-type, aside div:last-of-type i {
 	transform: rotate(180deg);
 }
 
+/*
+  __                     
+ / _|                    
+| |_ ___  _ __ _ __ ___  
+|  _/ _ \| '__| '_ ` _ \ 
+| || (_) | |  | | | | | |
+|_| \___/|_|  |_| |_| |_|
+                         
+                         
+*/
 
+/*HOME.PHP*/
+ul form {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	margin: 0 auto;
+	height: 2rem;
+	border: 2px solid rgb(59, 94, 100);
+	visibility: hidden;
+}
+
+/*Annule ligne 59*/
+form p {
+	box-shadow: none;
+	display: flex;
+    flex-direction: column;
+}
+
+form labe, form input[type=submit] {
+	font-family: 'Kaushan Script', cursive;
+	font-size: 2rem;	
+}
+
+form label {
+	font-style: italic;
+	font-weight: bold;
+	color: red;
+}
+
+form input:not([type=submit]) {
+	border-bottom: 1px solid rgb(59, 94, 100);
+    margin-left: 1rem;
+    text-align: center;
+}
+
+form input[type=submit] {
+    width: 40%;
+    margin: auto;
+	padding: 1.5rem;
+	border: 4px solid red;
+	color: rgba(59, 94, 100, 1);
+    opacity: 0.8;
+}
+
+form input[type=submit]:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+
+
+/*GAME.PHP*/
+article form {
+	visibility: hidden;
+}
+
+article form input[type=submit] {
+	width: 25%;
+	padding: 2rem;
+}
 
 
 /*
-  __                                            .__                
-_/  |_  ____   _____ ______   ________________  |__|______   ____  
-\   __\/ __ \ /     \\____ \ /  _ \_  __ \__  \ |  \_  __ \_/ __ \ 
- |  | \  ___/|  Y Y  \  |_> >  <_> )  | \// __ \|  ||  | \/\  ___/ 
- |__|  \___  >__|_|  /   __/ \____/|__|  (____  /__||__|    \___  >
-           \/      \/|__|                     \/                \/ 
-
+ _        _     _      
+| |      | |   | |     
+| |_ __ _| |__ | | ___ 
+| __/ _` | '_ \| |/ _ \
+| || (_| | |_) | |  __/
+ \__\__,_|_.__/|_|\___|
+                    
 
 */
 
-/*SCORE*/
+/*SCORE.php*/
 table {
 	color : white;
 	width: 50%;
@@ -533,6 +601,10 @@ caption, th, td {
 
 @media all and (max-width: 865px)
 {
+	body{
+		background-size: 430%; 
+	}
+	
 	/*boutons alignés retrouvent leur place d'origine*/
 	section {
 		position: inherit;
@@ -573,6 +645,14 @@ caption, th, td {
     	left: 50%;
     	top: 35%;
 	}
+	
+	ul form {
+		width: 70%;
+	}
+	
+	form input[type=submit] {
+		width: 60%;
+	}
 }
 
 
@@ -589,12 +669,13 @@ caption, th, td {
 
 @media all and (max-width: 500px)
 {
-	/* Pour Chrome sur moblie, on peut scroller sur la droite mais le centrage se fait à gauche ... ?!?! Navigateur de merde !
+	/*Pour Chrome sur moblie, on peut scroller sur la droite mais le centrage se fait à gauche... ?!?! Navigateur de merde !*/
 	body {
-		max-width: 500px;
-		overflow: hidden;
+		/*une couleur en attendant de trouver ou fair eun fond plus sympa pour mobile.*/
+		background: black;
 	}
-	*/
+	
+	
 	aside, h4, section, audio:first-of-type {
 		position: relative;
 	}
@@ -714,7 +795,92 @@ caption, th, td {
 		top: -29rem;
 	}
 	
+	form input[type=submit] {
+		width: 80%;
+	}
+	
+	article form input[type=submit] {
+	    width: 40%;
+	    padding: 3rem;
+	    border-radius: 100px;
+}
+	
 	audio:first-of-type {
 		bottom: 25rem;
 	}
+}
+
+/*
+    __  _       ____  _____ _____   ___  _____      ____  _____
+   /  ]| |     /    |/ ___// ___/  /  _]/ ___/     |    |/ ___/
+  /  / | |    |  o  (   \_(   \_  /  [_(   \_      |__  (   \_ 
+ /  /  | |___ |     |\__  |\__  ||    _]\__  |     __|  |\__  |
+/   \_ |     ||  _  |/  \ |/  \ ||   [_ /  \ |    /  |  |/  \ |
+\     ||     ||  |  |\    |\    ||     |\    |    \  `  |\    |
+ \____||_____||__|__| \___| \___||_____| \___|     \____| \___|
+                                                               
+*/
+
+/* EN CAS DE VICTOIRE OU DEFAITE*/
+.defeatedRival {
+	transform: translateX(5000px) rotate(360deg) translateY(250px);
+}
+
+.defeatedPlayer {
+	transform: translateX(-5000px) rotate(-360deg) translateY(250px);
+}
+
+/*EJECTION DES BOUTON*/
+.smashedButtonTopKame{
+	transform: rotate(-90deg) translateY(-1000px);
+}
+
+.smashedButtonTopKen{
+	transform: rotate(90deg) translateY(-1000px);
+}
+
+.smashedButtonMiddleKame{
+	transform: translateX(-1000px) rotate(-90deg) translateY(-100px);
+}
+
+.smashedButtonMiddleKen{
+	transform: translateX(1000px) rotate(-90deg) translateY(100px);
+}
+
+.smashedButtonBelowKame{
+	transform: translateX(-1200px) rotate(-15deg) translateY(200px);	
+}
+
+.smashedButtonBelowKen{
+	transform: translateX(1200px) rotate(15deg) translateY(200px);	
+}
+
+
+/*formulaire "vu/pavu FINIR DE STYLISER*/
+.visible {
+	visibility: visible;
+	margin: 3rem auto;
+    padding: 2rem;
+	height: auto;
+}
+
+.appearSubmit {
+	visibility: visible;
+}
+
+/*Champs valide*/
+.ok {
+	border-radius: 20px 20px 200px 20px;
+	background-color: rgb(184,249,184);
+}
+
+.wrong {
+	border-radius: 20px 20px 200px 20px;
+	background-color: rgb(255,131,131);
+}
+
+/*apparition bulle de bd*/
+.bubble{
+	opacity: 1;
+	z-index: 2;
 }

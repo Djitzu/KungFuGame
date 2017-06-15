@@ -1,2 +1,2 @@
-	<script type="text/javascript" src="02-view/js/index.js"></script>
+	<script type="text/javascript" src="02-view/js/about.js"></script>
 </html>
