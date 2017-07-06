@@ -1,9 +1,6 @@
-<?php session_start() ?>
-
 <!-- HEADER -->
 		<header>
 			<h1>SUPA CHI KUNG FU MI <span>FURY</span></h1>
-
 
 			<!-- En CONSTRUCTION -->
 			<nav>
@@ -14,6 +11,10 @@
 					
 					<?php if($_SESSION['pseudo']): ?>
 						<li><a href="03-controler/deconnexion.php">Deconnexion</a></li>
+					<?php endif; ?>
+					
+					<?php if(($_SESSION['pseudo'] === "Admin") && ( $_SESSION['idGroup'] === "1")): ?>
+						<li><a href="admin/index.php?page=index" target="_blank">Administration</a></li>
 					<?php endif; ?>
 					
 					<li><a href="#!">About</a></li>

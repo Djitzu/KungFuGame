@@ -1,0 +1,133 @@
+<?php
+require_once'01-model/class-members.php';
+
+//Afficher le membre cliqué sur le tableau de allMembre.phtml
+if (isset($_GET['memberId']))
+{
+    if ($_GET['memberId'] !== 'NotFound')
+    {
+        $id = $_GET['memberId'];
+        $oneUsers = new DataMember();
+        $member=$oneUsers->findOneMember($id);
+        $allScoreMember = $oneUsers->findScoreMember($id);
+    }
+}
+?>
+        <!--Formulaire de recherche de membre-->
+        <section id="anchorSearch"class="container">
+            
+            <!--Messages suites à edition-->
+            <?php switch(isset($_GET)) : case isset($_GET['memberUpDated']) : ?>
+                <h2 style="font-style:italic">Edition done</h2>
+            <?php break; case isset($_GET['memberBanned']) : ?>
+                <h2 style="font-style:italic">Member baned</h2>
+            <?php break; case isset($_GET['memberDeleted']) : ?>
+                <h2 style="font-style:italic">Member deleted</h2>
+            <?php break; case isset($_GET['selectedScoreDeleted']) : ?>
+                <h2 style="font-style:italic">Selected score deleted</h2>
+            <?php break; case isset($_GET['allScoreMemberDeleted']) : ?>
+                <h2 style="font-style:italic">All scores of this member have been erased</h2>
+            <?php break; case isset($_GET['NoSelection']) : ?>
+                 <h2 style="font-style:italic">No scores selected</h2>
+            <?php break; endswitch; ?>
+            
+            <form action="03-controler/searchOneMember.php" method="post">
+                <!--Input-->
+                <label class="col-xs-12 col-sm-12 form-group" for="searchMember"> <h3>Who are you looking for ?</h3></label>
+                <input class="col-xs-12 col-sm-offset-4 col-sm-4 input-lg form-group" type="text" id="searchMember" name="searchMember"  placeholder="Enter name, pseudo..."/>
+        
+                <!--Bouton-->
+                <label for="searchMemberSubmit" class="btn btn-info btn-lg col-xs-12 col-sm-offset-4 col-sm-4 "><i class="glyphicon glyphicon-search"></i> Search</label>
+                <input id="searchMemberSubmit" type="submit" class="hidden" />
+            </form>
+        </section>
+    
+        <!--si membreId est dans le GET-->
+        <?php if (isset($_GET['memberId'])) : ?>
+        
+            <!--Formulaire affichant le résultat de la recherche-->
+            <section class="container">
+                    
+                <!--Si MembreId est égal à 'NotFoud'-->
+                <?php if ($_GET['memberId'] === 'NotFound') : ?>
+                    <h2>Nothing found</h2>
+                <!--Sinon, créer et remplir le forulaire d'édition-->
+                <?php else : ?>
+                    
+                    <form class="col-sm-offset-3 col-sm-6" action="03-controler/actionOnMember.php?memberId=<?= $member['id'] ?>" method="post" onsubmit="return confirm('Are you sure ?');">
+                        <h3 id="result">Result :</h3>
+                        
+                            <!--Peudo-->
+                            <div class="has-feedback">
+                                <input class="input-lg form-control" type="text" name="pseudo" value="<?= $member['pseudo'] ?>"/>
+                                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                            </div>
+                            
+                            <!--firstName-->
+                            <div class=" has-feedback">
+                                <input class="input-lg form-control" type="text" name="firstName" value="<?= $member['firstName'] ?>"/>
+                                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                            </div>
+                            
+                            <!--lastName-->
+                            <div class="has-feedback">
+                                <input class="input-lg form-control" type="text" name="lastName" value="<?= $member['lastName'] ?>"/>
+                                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                            </div>
+                            
+                            <!--mail-->
+                            <div class="has-feedback">
+                                <input class="input-lg form-group form-control" type="email" name="email" value="<?= $member['mail'] ?>"/>
+                                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                            </div>    
+                            
+                            <!--Validations-->
+                            <!--Edit-->
+                            <label for="editSubmit" class="btn btn-info btn-lg col-xs-12 col-sm-4"><i class="glyphicon glyphicon-pencil"></i> Edit</label>
+                            <input id="editSubmit" type="submit" value="edit" class="hidden" name="edit"/>
+                            
+                            <!--Ban-->
+                            <label for="banSubmit" class="btn btn-warning btn-lg col-xs-12 col-sm-4"><i class="glyphicon glyphicon-ban-circle"></i> Ban</label>
+                            <input id="banSubmit" type="submit" value="ban" class="hidden" name="ban" />
+                            
+                            <!--Delete-->
+                            <label for="deleteSubmit" class="btn btn-danger btn-lg col-xs-12 col-sm-4"><i class="glyphicon glyphicon-trash"></i> Delete</label>
+                            <input id="deleteSubmit" type="submit" value="delete" class="hidden" name="delete"/>
+                        </form>
+                    </section>
+                
+                    <!--Affichage des scores du joueur-->
+                    <?php if ($allScoreMember) : ?>
+                        <section class="container">
+                           <form action="03-controler/eraseScore.php?memberId=<?= $member['id'] ?>" method="post" onsubmit="return confirm('Are you sure ?');">
+                                    <table class="table table-striped table-condensed well">
+                                        <caption><h3 class="text-center"><?= $member['pseudo'] ?>'s score :</h3></caption>
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Score</th>
+                                                <th class="text-center">Date</th>
+                                            </tr>
+                                        </thead>
+                                        <!--Création du tableau-->
+                                        <?php foreach($allScoreMember as $oneScore) : ?>
+                                            <tr>
+                                                <td><?= $oneScore['score'] ?></td>
+                                                <td><?= $oneScore['date'] ?></td>
+                                                <td>
+                                                    <input type="checkbox" name="del[]" value="<?= $oneScore['id'] ?>" />
+                                                </td>
+                                             </tr>
+                                         <?php endforeach ?>
+                                         
+                                    </table>
+                                <!--Supprimer la selection-->
+                                <label for="eraseSelection" class="btn btn-warning btn-lg"><i class="glyphicon glyphicon-remove-circle"></i> Delete Selection</label>
+                                <input id="eraseSelection" type="submit" value="eraseSelection" class="hidden" name="eraseSelection"/>
+                                <!--Supprimer tous les scores-->
+                                <label for="eraseAll" class="btn btn-danger btn-lg"><i class="glyphicon glyphicon-trash"></i> Delete All Score</label>
+                                <input id="eraseAll" type="submit" value="eraseAll" class="hidden" name="eraseAll"/>
+                            </form>
+                        </section>
+                    <?php endif;?><!--L 100-->
+                <?php endif; ?><!--L 52-->
+        <?php endif; ?><!--L46-->

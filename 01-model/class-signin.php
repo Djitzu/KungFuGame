@@ -7,7 +7,7 @@ class DataConnexion extends Request
     
     public function findUser($pseudo, $password_crypted)
     {
-        $resultat = $this->db->prepare("SELECT id, pseudo FROM $this->tableName WHERE pseudo = :pseudo AND password = :pass");
+        $resultat = $this->db->prepare("SELECT id, pseudo, id_groupe FROM $this->tableName WHERE pseudo = :pseudo AND password = :pass");
         $resultat->execute(array(
             'pseudo' => $pseudo,
             'pass' => $password_crypted));

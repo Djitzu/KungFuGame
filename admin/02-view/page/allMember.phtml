@@ -1,0 +1,47 @@
+<?php include_once'03-controler/request-member.php'; ?>
+        
+        <!--Tableau de tous les membres-->
+        <section>
+            <h3 id="anchorList">The list of all members</h3>
+            <div class="table-responsive">
+                <table class="table table-striped well">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Pseudo</th>
+                            <th class="text-center">First Name</th>
+                            <th class="text-center">Last Name</th>
+                            <th class="text-center">Email</th>
+                        </tr>
+                    
+                    <!--Affichage des membres et personanlisation des liens pour récupérer l'ID en get.-->
+                    <?php foreach ($allMembers as $member) : ?>
+                        <tr>
+                            <td class="btn-lg"><a href="index.php?page=index&memberId=<?= $member['id'] ?>#result"><?= $member['pseudo'] ?></a></td>
+                            <td class="btn-lg"><a href="index.php?page=index&memberId=<?= $member['id'] ?>#result"><?= $member['firstName'] ?></a></td>
+                            <td class="btn-lg"><a href="index.php?page=index&memberId=<?= $member['id'] ?>#result"><?= $member['lastName'] ?></a></td>
+                            <td class="btn-lg"><a href="index.php?page=index&memberId=<?= $member['id'] ?>#result"><?= $member['mail'] ?></a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    
+                </table>
+            </div>
+            
+               <!--Navigation du tableau-->
+                <nav>
+                    <ul id="list" class="pagination pagination-lg">
+                        <li id="fast-backward"><a class="btn-lg" href="index.php?page=allMember&numPage=1#anchorList"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
+                        <li id="backward"><a class="btn-lg" href="index.php?page=allMember&numPage=<?= $previousPage ?>#anchorList"><span class="glyphicon glyphicon-backward"></span></a></li>
+                        
+                        <!--Affiche 3 numéros de la page actuelle, précédente et suivante-->
+                        <?php for ($i= max(1, $currentPage - 1); $i <= min($currentPage + 1, $nbPage); $i++) : ?>
+                            <?php if ($i == $currentPage) : ?>
+                                <li><span class="btn btn-lg" style="cursor:default"><?= $i ?></span></li>
+                            <?php else : ?>
+                                <li><a class="btn-lg" href="index.php?page=allMember&numPage=<?= $i ?>#anchorList"><?= $i ?></a></li>
+                            <?php endif ;?>
+                        <?php endfor; ?>
+                        <li id="forward"><a class="btn-lg" href="index.php?page=allMember&numPage=<?= $nextPage ?>#anchorList"><span class="glyphicon glyphicon-forward"></span></a></li>
+                        <li id="fast-foraward"><a class="btn-lg" href="index.php?page=allMember&numPage=<?= $nbPage ?>#anchorList"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
+                    </ul>
+                </nav>
+        </section>

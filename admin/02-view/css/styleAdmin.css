@@ -1,0 +1,55 @@
+body {
+    background-color: #000;
+}
+
+section {
+    border-bottom:2px solid #EEEEEE;
+    
+}
+
+header {
+    padding-bottom: 20px;
+}
+
+section {
+    padding: 0 0 40px;
+    margin: 20px 0;
+}
+
+h1, h2, h3, p {
+    color:#31B0D5;
+}
+
+nav {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+td label i {
+    color:red;
+}
+
+label:hover{
+    cursor: pointer;
+}
+
+.pagination>li>a {
+    background-color: transparent;
+    border: none;
+}
+
+
+@media all and (max-width: 400px)
+{
+    #list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:center;
+    }
+    
+    .pagination>li>a {
+        margin:0 10px;
+    }
+    
+ 
+}

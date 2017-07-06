@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 //-------------HEAD
 include'02-view/partials/head.php';
 
@@ -41,8 +43,6 @@ $page = 'home';
 if (isset($_GET['page']) && ($_GET['page'] === 'home') || ($_GET['page'] === 'game') || ($_GET['page'] === 'score') || ($_GET['page'] === 'cheater'))
 {
     $page = $_GET['page'];
-} else {
-    echo'<h1>Laisse mon url tranquille petit margoulin !!</h1>';
 }
 
 //----------------BODY

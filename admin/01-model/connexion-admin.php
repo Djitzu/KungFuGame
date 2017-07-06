@@ -1,6 +1,5 @@
 <?php
 
-/*CREER UNE CLASSE POUR SE CONECTER À LA BIEN, EN OBJET*/
 abstract class Request
 {
     protected $db;
@@ -10,7 +9,7 @@ abstract class Request
     public function __construct()
     {
         try{
-            $this->db = new PDO('mysql:host=trololo;dbname=trololo;charset=utf8', 'trololo', 'trololo');
+           $this->db = new PDO('mysql:host=trololo;dbname=trololo;charset=utf8', 'trololo', 'trololo');
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $erreur) {
             die(
@@ -20,6 +19,5 @@ abstract class Request
         }
     }
 }
-
 
 ?>

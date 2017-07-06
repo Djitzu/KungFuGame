@@ -135,7 +135,7 @@ function attackRival()
 	//Bulle Rival
 	makeBubble(BubbleRivalContent,  "fa fa-hand-paper-o", RivalBubbleChoice);
 
-	infoTextDown.textContent = "Ken use Quick Slap !";
+	infoTextDown.textContent = "Ken uses Quick Slap !";
 }
 
 
@@ -145,7 +145,7 @@ function lightAttackPlayer()
 	rival.pv -= damage;
 	lifeBarHited(rival.pv, hpMaxRival, hpRival);
 	makeBubble(BubblePlayerContent, "fa fa-hand-paper-o", playerBubbleChoice);
-	infoTextUp.textContent = "Kame Sennin use Quick Slap !";
+	infoTextUp.textContent = "Kame Sennin uses Quick Slap !";
 }
 
 
@@ -157,7 +157,7 @@ function heavyAttackRival()
 	player.pv -= damage;
 	lifeBarHited(player.pv, hpMaxPlayer, hpPlayer);
 	makeBubble(BubbleRivalContent, "fa fa-hand-rock-o", RivalBubbleChoice);
-	infoTextDown.textContent = "Ken use Grosse Patate !";
+	infoTextDown.textContent = "Ken uses Grosse Patate !";
 }
 
 function GrossePatate()
@@ -166,7 +166,7 @@ function GrossePatate()
 	rival.pv -= damage;
 	lifeBarHited(rival.pv, hpMaxRival, hpRival);
 	makeBubble(BubblePlayerContent, "fa fa-hand-rock-o", playerBubbleChoice);
-	infoTextUp.textContent = "Kame Sennin use Grosse Patate !";
+	infoTextUp.textContent = "Kame Sennin uses Grosse Patate !";
 }
 
 //---------------------Détermine le choix de Rival
@@ -272,7 +272,7 @@ function attackPlayer()
 				lightAttackPlayer();
 				break;
 			case 3:
-				var damage = (dice(1, 6) + player.att) *2;
+				var damage = (dice(1, 6) + player.att) *2;/*A la base : /2, changement pour rapporcher le jeu d'un pierre feuille ciseau*/
 				rival.pv -= damage;	
 				lifeBarHited(rival.pv, hpMaxRival, hpRival);
 				makeBubble(BubblePlayerContent, "fa fa-hand-paper-o",playerBubbleChoice);

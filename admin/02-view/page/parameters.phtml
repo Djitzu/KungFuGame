@@ -1,0 +1,15 @@
+            <!--Manual Reset-->
+            <section class="container">
+                <?php if (isset($_GET['scoreDeleted'])) :?>
+                    <h3 style="color:white">- All score have been deleted ! -</h3>
+                <?php endif; ?>
+                
+                <h3>DANGER ZONE</h3>
+                <h3>Are you sure you want to press this dangerous red button ?</h3>
+                <form action="03-controler/deleteAllScore.php" method="post" onsubmit="return confirm('You are about to deleted all the score. Are you sure ?');">
+                    <label for="eraseScore" class="btn btn-danger btn-lg col-xs-12 col-sm-offset-4 col-sm-4"><i class="glyphicon glyphicon-alert"></i> Delete all score <i class="glyphicon glyphicon-alert"></i></label>
+                    <input id="eraseScore" type="submit" value="Go" class="hidden" />
+                </form>
+            </section>
+            
+            

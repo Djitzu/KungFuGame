@@ -1,7 +1,7 @@
 	<main>
 			<!--Si le joueur est conencté-->
 			<?php if (($_GET['connexion'] === 'ok') || ($_SESSION['pseudo'])) : ?>
-				<a href="index.php?page=game" class="fight">FIGHT NOW !</a>
+				<a href="index.php?page=game" class="fight">Press start button !</a>
 		
 			<!--Sinon, formulaire complet-->
 			<?php else : ?>
@@ -28,30 +28,30 @@
 						<form action="03-controler/check-signup.php" method="post" >
 							<p>
 								<label for="pseudo">PSEUDO</label>
-								<input type="text" required placeholder="pseudo" name="pseudo" />
+								<input type="text" required name="pseudo" autocomplete="off" placeholder="Darkvador" title="Only letters (including uppercase), max 20 characters"/>
 							</p>
 							<p>
 								<label for="firstName">FIRST NAME</label>
-								<input type="text" required placeholder="First name" name="firstName"/>
+								<input type="text" autocomplete="off" name="firstName" placeholder="Dark" title="Only letters (including uppercase), max 20 characters"/>
 							</p>
 							<p>
 								<label for="lastName">LAST NAME</label>
-								<input type="text" required placeholder="Last name" name="lastName"/>
+								<input type="text" required name="lastName" autocomplete="off" placeholder="Vador" title="Only letters (including uppercase), max 20 characters"/>
 							</p>
 							<p>
 								<label for="email">EMAIL</label>
-								<input type="email" required placeholder="mail" name="email"/>
+								<input type="email" name="email" autocomplete="off" placeholder="dark.vador@empire.gal"/>
 							</p>
 							<p>
 								<label for="password">PASSWORD</label>
-								<input type="password" required placeholder="password "name="password"/>
+								<input type="password" required name="password" autocomplete="off" placeholder="8-15 characters"/>
 							</p>
 								<input type="submit" value="Inscription" name="validation"/>
 						</form action="" method="post">
 					</li>
 					
 						<!--FREE TOUR -->
-					<li><a href="index.php?page=game">Anonimous Try</a></li>					
+					<li><a href="index.php?page=game">Anonymous Try</a></li>					
 				</ul>
 			<?php endif; ?>
 

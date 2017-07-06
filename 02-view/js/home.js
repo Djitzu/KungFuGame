@@ -28,7 +28,8 @@ var password = document.querySelector('li+li form [name="password"]');
 //Regex pour chaque champs.
 var regexAlphaNum = /^[a-zA-Z]{0,20}(([-\_ ][a-zA-Z]{0,20}){0,3})?[^0-9]$/;
 var regexMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-var regexPassword = /^([a-zA-Z0-9@*#]{8,15})$/;
+//var regexPassword = /^([a-zA-Z0-9@*#]{8,15})$/;
+var regexPassword = /^([a-zA-Z0-9@*#^\\$£+§µ%\/-]{8,15})$/;
 
 
 /**************************/

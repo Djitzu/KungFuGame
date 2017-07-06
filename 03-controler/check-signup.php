@@ -51,7 +51,7 @@ if (!ifMatch($regexAlphaNum, $pseudo))
     //Objet issu de class-inscription.php pour écrire dans la DB
     $inscrit = new InsertMember();
     $inscrit->insert($pseudo, $firstName, $lastName, $mail, $password_crypted);
-    header('Location:https://ajax-training-jeromepisi.c9users.io/KungFu/index.php?page=home&inscription=ok');    
+    header('Location:../index.php?page=home&inscription=ok');    
 }
 
 ?>
